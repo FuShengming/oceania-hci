@@ -11,13 +11,13 @@ function draw() {
     let context = canvas.getContext("2d");
     canvas.width = canvas_width;
     canvas.height = canvas_height;
-    let sCode = "A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0,q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m";
+    let sCode = "1,2,3,4,5,6,7,8,9,0,q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,z,x,c,v,b,n,m";
     let aCode = sCode.split(",");
     let aLength = aCode.length;//获取到数组的长度
 
     for (let i = 0; i <= 3; i++) {
         let j = Math.floor(Math.random() * aLength);
-        let deg = Math.random() * 30 * Math.PI / 180;
+        let deg = Math.random() * 15 * Math.PI / 180;
         let txt = aCode[j];
         show_num[i] = txt;
         let x = 3 + i * 12;
@@ -33,14 +33,14 @@ function draw() {
         context.rotate(-deg);
         context.translate(-x, -y);
     }
-    for (let i = 0; i <= 3; i++) { //验证码上显示线条
+    for (let i = 0; i <= 0; i++) { //验证码上显示线条
         context.strokeStyle = randomColor();
         context.beginPath();
         context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
         context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
         context.stroke();
     }
-    for (let i = 0; i <= 15; i++) { //验证码上显示小点
+    for (let i = 0; i <= 3; i++) { //验证码上显示小点
         context.strokeStyle = randomColor();
         context.beginPath();
         let x = Math.random() * canvas_width;
@@ -52,9 +52,9 @@ function draw() {
 }
 
 function randomColor() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
+    let r = Math.floor(Math.random() * 128);
+    let g = Math.floor(Math.random() * 128);
+    let b = Math.floor(Math.random() * 128);
     return "rgb(" + r + "," + g + "," + b + ")";
 }
 
