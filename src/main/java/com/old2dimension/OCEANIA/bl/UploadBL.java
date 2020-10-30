@@ -14,5 +14,4 @@ public interface UploadBL {
     public ResponseVO uploadJar(String uuid, MultipartFile file);
 
     public ResponseVO cancel(int userId, String uuid);
-    public ResponseVO groupAnalyzeJar(int groupId, String uuid) ;
 }

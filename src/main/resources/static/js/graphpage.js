@@ -40,8 +40,7 @@ $(function () {
     if (userId === undefined) window.location.href = "/login";
     let url = document.location.toString();
     if (!url.includes("?code=")) window.location.href = "/workspace";
-    let codeId = Number(url.slice(url.indexOf("code=") + 5, url.indexOf("&")));
-    let isGroupCode = Number(url.slice(url.indexOf("group=") + 6)) === 1;
+    let codeId = Number(url.slice(url.indexOf("?code=") + 6));
     // let codeId = localStorage['codeId'];
     // if (codeId === undefined) window.location.href = "/workspace";
 
@@ -53,7 +52,7 @@ $(function () {
             dataType: "json",
             contentType: 'application/json',
             data: JSON.stringify({
-                userId: isGroupCode ? 1 : userId,
+                userId: userId,
                 codeId: codeId,
                 date: new Date(),
                 closeness: $("#range_value").val(),
@@ -97,50 +96,18 @@ $(function () {
                     let labels = data.content;
                     let h = "";
                     labels.forEach(function (label) {
-                        if (userId == label.userId) {
-                            h += "<div class=\"card m-2\">\n" +
-                                "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
-                                "<div class=\"card-body\">\n" +
-                                "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
-                                htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
-                                "</div>\n" +
-                                "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                                "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
-                                "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
-                                "</div>\n" +
-                                "</div>\n" +
-                                "</div>";
-                        } else {
-                            $.ajax({
-                                type: "get",
-                                url: "/user/getById?id=" + label.userId,
-                                headers: {"Authorization": $.cookie('token')},
-                                dataType: "json",
-                                contentType: 'application/json',
-                                success: function (data) {
-                                    if (data.success) {
-                                        console.log(data.content);
-                                        h += "<div class=\"card m-2\">\n" +
-                                            "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
-                                            "<div class=\"card-body\">\n" +
-                                            "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
-                                            htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
-                                            "</div>\n" +
-                                            "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                                            "<div>This label is created by " + data.content[0].name + ".</div>\n" +
-                                            "</div>\n" +
-                                            "</div>\n" +
-                                            "</div>";
-                                        $("#labels-container").html(h);
-                                    } else {
-                                        console.log(data.message);
-                                    }
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
+                        h += "<div class=\"card m-2\">\n" +
+                            "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
+                            "<div class=\"card-body\">\n" +
+                            "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
+                            htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
+                            "</div>\n" +
+                            "<div class=\"mt-3\" style=\"text-align: right\">\n" +
+                            "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
+                            "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
+                            "</div>\n" +
+                            "</div>\n" +
+                            "</div>";
                     });
                     $("#labels-container").html(h);
                     $(".label-edit").on('click', function (event) {
@@ -204,50 +171,18 @@ $(function () {
                     let labels = data.content;
                     let h = "";
                     labels.forEach(function (label) {
-                        if (userId == label.userId) {
-                            h += "<div class=\"card m-2\">\n" +
-                                "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
-                                "<div class=\"card-body\">\n" +
-                                "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
-                                htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
-                                "</div>\n" +
-                                "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                                "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
-                                "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
-                                "</div>\n" +
-                                "</div>\n" +
-                                "</div>";
-                        } else {
-                            $.ajax({
-                                type: "get",
-                                url: "/user/getById?id=" + label.userId,
-                                headers: {"Authorization": $.cookie('token')},
-                                dataType: "json",
-                                contentType: 'application/json',
-                                success: function (data) {
-                                    if (data.success) {
-                                        console.log(data.content);
-                                        h += "<div class=\"card m-2\">\n" +
-                                            "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
-                                            "<div class=\"card-body\">\n" +
-                                            "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
-                                            htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
-                                            "</div>\n" +
-                                            "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                                            "<div>This label is created by " + data.content[0].name + ".</div>\n" +
-                                            "</div>\n" +
-                                            "</div>\n" +
-                                            "</div>";
-                                        $("#labels-container").html(h);
-                                    } else {
-                                        console.log(data.message);
-                                    }
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
+                        h += "<div class=\"card m-2\">\n" +
+                            "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
+                            "<div class=\"card-body\">\n" +
+                            "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
+                            htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
+                            "</div>\n" +
+                            "<div class=\"mt-3\" style=\"text-align: right\">\n" +
+                            "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
+                            "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
+                            "</div>\n" +
+                            "</div>\n" +
+                            "</div>";
                     });
                     $("#labels-container").html(h);
                     $(".label-edit").on('click', function (event) {
@@ -312,50 +247,18 @@ $(function () {
                     let labels = data.content;
                     let h = "";
                     labels.forEach(function (label) {
-                        if (userId == label.userId) {
-                            h += "<div class=\"card m-2\">\n" +
-                                "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
-                                "<div class=\"card-body\">\n" +
-                                "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
-                                htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
-                                "</div>\n" +
-                                "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                                "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
-                                "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
-                                "</div>\n" +
-                                "</div>\n" +
-                                "</div>";
-                        } else {
-                            $.ajax({
-                                type: "get",
-                                url: "/user/getById?id=" + label.userId,
-                                headers: {"Authorization": $.cookie('token')},
-                                dataType: "json",
-                                contentType: 'application/json',
-                                success: function (data) {
-                                    if (data.success) {
-                                        console.log(data.content);
-                                        h += "<div class=\"card m-2\">\n" +
-                                            "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
-                                            "<div class=\"card-body\">\n" +
-                                            "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
-                                            htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
-                                            "</div>\n" +
-                                            "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                                            "<div>This label is created by " + data.content[0].name + ".</div>\n" +
-                                            "</div>\n" +
-                                            "</div>\n" +
-                                            "</div>";
-                                        $("#labels-container").html(h);
-                                    } else {
-                                        console.log(data.message);
-                                    }
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
+                        h += "<div class=\"card m-2\">\n" +
+                            "<h5 class=\"card-header\" id=\"lt-" + label.id + "\">" + label.title + "</h5>\n" +
+                            "<div class=\"card-body\">\n" +
+                            "<div class=\"card-text\" id=\"lc-" + label.id + "\">" +
+                            htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
+                            "</div>\n" +
+                            "<div class=\"mt-3\" style=\"text-align: right\">\n" +
+                            "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
+                            "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
+                            "</div>\n" +
+                            "</div>\n" +
+                            "</div>";
                     });
                     $("#labels-container").html(h);
                     $(".label-edit").on('click', function (event) {
@@ -807,7 +710,7 @@ $(function () {
             dataType: "json",
             contentType: 'application/json',
             data: JSON.stringify({
-                userId: isGroupCode ? 1 : userId,
+                userId: userId,
                 codeId: codeId,
                 vertexVO: info,
             }),
@@ -844,7 +747,7 @@ $(function () {
         dataType: "json",
         contentType: 'application/json',
         data: JSON.stringify({
-            userId: isGroupCode ? 1 : userId,
+            userId: userId,
             codeId: codeId
         }),
         success: function (data) {
@@ -916,7 +819,7 @@ $(function () {
         dataType: "json",
         contentType: 'application/json',
         data: JSON.stringify({
-            userId: isGroupCode ? 1 : userId,
+            userId: userId,
             codeId: codeId
         }),
         success: function (data) {
@@ -1194,7 +1097,7 @@ $(function () {
             dataType: "json",
             contentType: 'application/json',
             data: JSON.stringify({
-                userId: isGroupCode ? 1 : userId,
+                userId: userId,
                 codeId: codeId
             }),
             timeout: 10000,

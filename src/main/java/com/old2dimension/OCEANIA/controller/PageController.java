@@ -35,23 +35,8 @@ public class PageController {
     public String register() {
         return "/html/register.html";
     }
-
-    @RequestMapping("/notification")
-    public String notification() {
-        return "/html/notification.html";
-    }
-
-    @RequestMapping("/tasks")
-    public String tasks() {
-        return "/html/tasks.html";
-    }
-
-    @RequestMapping("/groups")
-    public String groups() {
-        return "/html/groups.html";
-    }
-    @RequestMapping("/test")
-    public String cy() {
-        return "/html/test.html";
-    }
+//    @RequestMapping("/cy")
+//    public String cy() {
+//        return "/html/cytotest.html";
+//    }
 }
