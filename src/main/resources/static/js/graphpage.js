@@ -1,4 +1,6 @@
 $(function () {
+    $(".tooltip-options a").tooltip({html : true });
+
     let htmlDecodeByRegExp = function (str) {
         if (str.length == 0) return "";
         let temp = str.replace(/&amp;/g, "&");
