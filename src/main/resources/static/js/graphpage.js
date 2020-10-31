@@ -1,5 +1,5 @@
 $(function () {
-    $(".tooltip-options a").tooltip({html : true });
+    $(".tooltip-options a").tooltip({html: true});
 
     let htmlDecodeByRegExp = function (str) {
         if (str.length == 0) return "";
@@ -692,6 +692,22 @@ $(function () {
     };
 
     let refresh = function () {
+        let max = 0;
+        cy.$('.domain').forEach(function (d) {
+            if (d.data('numOfVertex') > max) max = d.data('numOfVertex');
+        });
+        console.log(max);
+        if (max > 300) {
+            let tip = `<div class="alert alert-warning alert-dismissible fade show m-2" role="alert"
+    style="z-index: 3;" id="number-alert">
+    The elements on the graph are too much now. You can adjust CLOSSNESS to filter out weak dependencies.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>`;
+            $("#tips").html(tip);
+        }
+        else $("#tips").html("");
         if (cy.$("node").length < 1000) cy.layout(cose_bilkent_layout).run();
         else cy.layout(fcose_layout).run();
     };
