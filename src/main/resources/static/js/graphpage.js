@@ -842,7 +842,9 @@ $(function () {
         success: function (data) {
             if (data.success) {
                 console.log(JSON.parse(data.content.cyInfo));
-                cy = cytoscape({container: document.getElementById('cy_container')});
+                cy = cytoscape({
+                    container: document.getElementById('cy_container'),
+                });
                 cy.json(JSON.parse(data.content.cyInfo));
                 cy.layout(preset_layout).run();
                 setCyStyle();
@@ -1263,6 +1265,10 @@ $(function () {
                         nodes: graphData.nodes,
                         edges: graphData.edges,
                     },
+
+                    wheelSensitivity: 0.5,
+                    minZoom:0.08,
+                    maxZoom:2.00
                 });
                 setCyStyle();
                 refresh();
