@@ -23,6 +23,10 @@
             font-size: 14px;
             font-style: normal;
             color: #777;
+            background-image:  url("../imgs/head.jpg");
+            background-position: -20% -20%;
+            background-attachment: fixed;
+            background-size: cover;
         }
 
         .navbar-brand {
@@ -69,16 +73,41 @@
             color: #000;
         }
 
-        .caption .title {
-            font-weight: 900;
-            background-color: rgba(17, 17, 17, 0.5);
-            width: 40%;
-            color: #fff;
-            padding: 18px;
-            font-size: 25px;
-            letter-spacing: 3px;
+        /*.caption .title {*/
+        /*    font-weight: 900;*/
+        /*    background-color: rgba(17, 17, 17, 0.5);*/
+        /*    width: 40%;*/
+        /*    color: #fff;*/
+        /*    padding: 18px;*/
+        /*    font-size: 25px;*/
+        /*    letter-spacing: 3px;*/
+        /*}*/
+
+        .title{
+            color: white;
+            padding-left: 3%;
+            font-size: 70px;
+            font-family: -apple-system;
+            font-weight: inherit;
         }
 
+        .content{
+            color: #dddddd;
+            padding-left: 3%;
+            font-size: 15px;
+            width: 55%;
+        }
+
+        .content-link{
+            color: white;
+            font-size: 25px;
+            padding-left: 3%;
+            margin-top: 3%;
+        }
+
+        a:hover{
+            color:white;
+        }
         /* Turn off parallax scrolling for tablets and phones */
         @media only screen and (max-device-width: 1024px) {
             .bgimg-1, .bgimg-2, .bgimg-3 {
@@ -114,35 +143,20 @@
         });
     });
 </script>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0">
-    <a class="navbar-brand h1 m-0 col-2" href="#">👴 Old2Dimension</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0" style="height: 6%">
+    <a class="navbar-brand h1 m-0 col-2" href="/index">————👴 Oceania————</a>
 
-    <div class="collapse navbar-collapse col-10 px-0">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+    <div class="collapse navbar-collapse col-10 px-0" >
+        <ul class="navbar-nav mr-auto" >
+            <li class="nav-item active" style="padding-right: 65%;padding-left: 180%">
+                <a class="nav-link" href="/index">Home<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" style="padding-right: 60%">
                 <a class="nav-link" href="/workspace">MyProject</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/graph">Graph</a>
             </li>
-            <!--            <li class="nav-item dropdown">-->
-            <!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
-            <!--                   aria-haspopup="true" aria-expanded="false">-->
-            <!--                    Dropdown-->
-            <!--                </a>-->
-            <!--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-            <!--                    <a class="dropdown-item" href="#">Action</a>-->
-            <!--                    <a class="dropdown-item" href="#">Another action</a>-->
-            <!--                    <div class="dropdown-divider"></div>-->
-            <!--                    <a class="dropdown-item" href="#">Something else here</a>-->
-            <!--                </div>-->
-            <!--            </li>-->
-            <!--            <li class="nav-item">-->
-            <!--                <a class="nav-link disabled" href="#">Disabled</a>-->
-            <!--            </li>-->
         </ul>
         <div class="d-flex">
             <button class="btn btn-outline-light mx-2" id="sign-in">Sign In</button>
@@ -153,59 +167,81 @@
     </div>
 </nav>
 
-<div class="bgimg-1">
-    <div class="caption">
-        <div class="title d-block" style="margin-left: 30%;margin-top: -4rem;line-height: 3rem;">
-            OCEANIA：an Online platform for Code dEpendency ANalysis and vIsuAlization
-        </div>
-    </div>
+
+<div style="padding-top: 5%">
+    <p class="title">Oceania</p>
+    <p class="content">The objectives of OCEANIA is to support the understanding of software systems (i.e., its structure) and
+            algorithms (e.g., by animating the behavior of sorting algorithms) as well as the analysis and exploration of
+            software systems and their anomalies (e.g., by showing classes with high coupling) and their development and
+            evolution. One of the strengths of OCEANIA is to combine and relate information of software systems that are not
+            inherently linked, for example by projecting code changes onto software execution traces.</p>
+    <p style="padding-top: 5px;font-size: 20px;" class="content">
+        ● Upload&ensp;&ensp;&ensp;● Analyze&ensp;&ensp;&ensp;● Check&ensp;&ensp;&ensp;● Note&ensp;&ensp;&ensp;● Share
+    </p>
+    <p style="padding-top: 5px;" class="content">
+        * WE ONLY PROVIDE JAVA CODE ANALYZING NOW.
+    </p>
+    <div style="padding-top: 3%"><a class="content-link" href="/workspace"  >Start Now ></a><div>
 </div>
 
-<div style="color: #777;background-color:white;text-align:center;padding:50px 80px;">
-    <h3 style="text-align:center;">OCEANIA</h3>
-    <p>The objectives of OCEANIA is to support the understanding of software systems (i.e., its structure) and
-        algorithms (e.g., by animating the behavior of sorting algorithms) as well as the analysis and exploration of
-        software systems and their anomalies (e.g., by showing classes with high coupling) and their development and
-        evolution. One of the strengths of OCEANIA is to combine and relate information of software systems that are not
-        inherently linked, for example by projecting code changes onto software execution traces.</p>
-    <p>OCEANIA can be used as tool and technique to explore and analyze software system information, e.g., to discover
-        anomalies similar to the process of visual data mining. For example, OCEANIA is used to monitoring activities
-        such as for code quality or team activity. OCEANIA can participate to Software Intelligence in allowing to
-        discover and take advantage of mastering inner components of software systems.</p>
-</div>
 
-<div class="bgimg-2">
-    <div class="caption">
-        <span class="title" style="background-color:transparent;font-size:25px;color: #f7f7f7;font-weight: 700;">TO COMPREHEND</span>
-    </div>
-</div>
 
-<div style="position:relative;">
-    <div style="color:#ddd;background-color:#282E34;padding:50px 80px;text-align: center;">
-        <p>Comprehending makes it easier to maintain and iterate your code.</p>
-    </div>
-</div>
 
-<div class="bgimg-3">
-    <div class="caption">
-        <span class="title"
-              style="background-color:transparent;font-size:25px;color: #111;font-weight: 700;">CODE VISUALIZATION</span>
-    </div>
-</div>
 
-<div style="position:relative;">
-    <div style="color:#ddd;background-color:#282E34;padding:50px 80px;text-align: center;">
-        <p>Intuitive, abstract, and readable. Focused on both utility and aesthetics.</p>
-    </div>
-</div>
 
-<div class="bgimg-1">
-    <div class="caption">
-        <button class="btn btn-primary" id="start-btn"
-                style="height: 4rem;font-size: 1.5rem;border: antiquewhite solid 2px;margin-top: -2rem;background-color: #4e9fc1;">
-            START NOW
-        </button>
-    </div>
-</div>
+<!--<div class="bgimg-1">-->
+<!--    <div class="caption">-->
+<!--        <div class="title d-block" style="margin-left: 30%;margin-top: -4rem;line-height: 3rem;">-->
+<!--            OCEANIA：an Online platform for Code dEpendency ANalysis and vIsuAlization-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div style="color: #777;background-color:white;text-align:center;padding:50px 80px;">-->
+<!--    <h3 style="text-align:center;">OCEANIA</h3>-->
+<!--    <p>The objectives of OCEANIA is to support the understanding of software systems (i.e., its structure) and-->
+<!--        algorithms (e.g., by animating the behavior of sorting algorithms) as well as the analysis and exploration of-->
+<!--        software systems and their anomalies (e.g., by showing classes with high coupling) and their development and-->
+<!--        evolution. One of the strengths of OCEANIA is to combine and relate information of software systems that are not-->
+<!--        inherently linked, for example by projecting code changes onto software execution traces.</p>-->
+<!--    <p>OCEANIA can be used as tool and technique to explore and analyze software system information, e.g., to discover-->
+<!--        anomalies similar to the process of visual data mining. For example, OCEANIA is used to monitoring activities-->
+<!--        such as for code quality or team activity. OCEANIA can participate to Software Intelligence in allowing to-->
+<!--        discover and take advantage of mastering inner components of software systems.</p>-->
+<!--</div>-->
+
+<!--<div class="bgimg-2">-->
+<!--    <div class="caption">-->
+<!--        <span class="title" style="background-color:transparent;font-size:25px;color: #f7f7f7;font-weight: 700;">TO COMPREHEND</span>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div style="position:relative;">-->
+<!--    <div style="color:#ddd;background-color:#282E34;padding:50px 80px;text-align: center;">-->
+<!--        <p>Comprehending makes it easier to maintain and iterate your code.</p>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="bgimg-3">-->
+<!--    <div class="caption">-->
+<!--        <span class="title"-->
+<!--              style="background-color:transparent;font-size:25px;color: #111;font-weight: 700;">CODE VISUALIZATION</span>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div style="position:relative;">-->
+<!--    <div style="color:#ddd;background-color:#282E34;padding:50px 80px;text-align: center;">-->
+<!--        <p>Intuitive, abstract, and readable. Focused on both utility and aesthetics.</p>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="bgimg-1">-->
+<!--    <div class="caption">-->
+<!--        <button class="btn btn-primary" id="start-btn"-->
+<!--                style="height: 4rem;font-size: 1.5rem;border: antiquewhite solid 2px;margin-top: -2rem;background-color: #4e9fc1;">-->
+<!--            START NOW-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
 </body>
 </html>

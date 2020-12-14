@@ -21,6 +21,7 @@
         body {
             height: 100%;
             width: 100%;
+            font-family: fira-sans, sans-serif;
         }
 
         .navbar-brand {
@@ -29,11 +30,34 @@
             font-style: normal;
         }
 
+        .nav-link {
+            font-size: 1.2rem;
+        }
+
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0">
-    <a class="navbar-brand h1 m-0 col-2" href="#">👴 Old2Dimension</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0" style="height: 6%">
+    <a class="navbar-brand h1 m-0 col-2" href="/index">————👴 Oceania————</a>
+
+    <div class="collapse navbar-collapse col-10 px-0" >
+        <ul class="navbar-nav mr-auto" >
+            <li class="nav-item active" style="padding-right: 65%;padding-left: 180%">
+                <a class="nav-link" href="/index">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" style="padding-right: 60%">
+                <a class="nav-link" href="/workspace">MyProject</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/graph">Graph</a>
+            </li>
+        </ul>
+        <div class="d-flex">
+            <button class="btn btn-outline-light mx-2" id="sign-in">Sign In</button>
+            <button class="btn btn-outline-light mx-2" id="sign-up">Sign Up</button>
+        </div>
+
+    </div>
 </nav>
 <div class="login-container">
     <div class="login-line-container">
