@@ -706,8 +706,7 @@ $(function () {
     </button>
 </div>`;
             $("#tips").html(tip);
-        }
-        else $("#tips").html("");
+        } else $("#tips").html("");
         if (cy.$("node").length < 1000) cy.layout(cose_bilkent_layout).run();
         else cy.layout(fcose_layout).run();
     };
@@ -1182,6 +1181,12 @@ $(function () {
                         {
                             selector: 'node.vertex',
                             style: {
+                                'width': function (ele) {
+                                    return Math.ceil(30 * (1 + Math.log(ele.outdegree()) / Math.log(2)));
+                                },
+                                'height': function (ele) {
+                                    return Math.ceil(30 * (1 + Math.log(ele.outdegree()) / Math.log(2)));
+                                },
                                 'background-color': '#9EC9FF',
                                 'border-width': 1,
                                 'border-color': '#5B8FF9'
