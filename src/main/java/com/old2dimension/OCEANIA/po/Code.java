@@ -9,6 +9,20 @@ public class Code {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @Column(name = "user_id")
+    private int userId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "num_of_vertices")
+    private int numOfVertices;
+    @Column(name = "num_of_edges")
+    private int numOfEdges;
+    @Column(name = "num_of_domains")
+    private int numOfDomains;
+    @Column(name = "is_default")
+    private int is_default;
     public int getId() {
         return id;
     }
@@ -24,20 +38,6 @@ public class Code {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "name")
-    private String name;
-    @Column(name = "num_of_vertices")
-    private int numOfVertices;
-    @Column(name = "num_of_edges")
-    private int numOfEdges;
-    @Column(name = "num_of_domains")
-    private int numOfDomains;
-    @Column(name = "is_default")
-    private int is_default;
 
 
     public Code() {

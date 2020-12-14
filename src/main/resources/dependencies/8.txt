@@ -1,0 +1,6 @@
+M:src.CarFactory:create() (O)src.Car:<init>()
+M:src.Main:main(java.lang.String[]) (O)src.CarFactory:<init>()
+M:src.Main:main(java.lang.String[]) (M)src.CarFactory:create()
+M:src.Main:main(java.lang.String[]) (I)src.Moveable:go()
+M:src.SimpleVehicleFactory:createCar() (O)src.Car:<init>()
+M:src.SimpleVehicleFactory:createBroom() (O)src.Broom:<init>()

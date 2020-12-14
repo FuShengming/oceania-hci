@@ -47,7 +47,7 @@ public class GraphCalculateImpl implements GraphCalculateBL {
         if (currentUser == null) {
             return ResponseVO.buildFailure("no such user");
         }
-        Code curCode = codeRepository.findCodeByIdAndUserId(userAndCodeForm.getCodeId(), userAndCodeForm.getUserId());
+        Code curCode = codeRepository.findCodeById(userAndCodeForm.getCodeId());
         if (curCode == null) {
             return ResponseVO.buildFailure("no such code");
         }
