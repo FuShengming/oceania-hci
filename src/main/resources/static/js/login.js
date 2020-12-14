@@ -7,7 +7,12 @@ $(document).ready(function () {
     $(".login-btn").click(function () {
         login()
     });
-
+    $("#sign-in").on('click', function () {
+        window.location.href = "/login";
+    });
+    $("#sign-up").on('click', function () {
+        window.location.href = "/register";
+    });
     // 按下回车登录
     $(".captcha-input").keypress(function (e) {
         let eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
