@@ -700,7 +700,7 @@ $(function () {
         if (max > 300) {
             let tip = `<div class="alert alert-warning alert-dismissible fade show m-2" role="alert"
     style="z-index: 3;" id="number-alert">
-    The elements on the graph are too much now. You can adjust CLOSSNESS to filter out weak dependencies.
+    The elements on the graph are too much now. You can adjust CLOSENESS to filter out weak dependencies.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -1189,7 +1189,15 @@ $(function () {
                                 },
                                 'background-color': '#9EC9FF',
                                 'border-width': 1,
-                                'border-color': '#5B8FF9'
+                                'border-color': '#5B8FF9',
+                                'label': function (ele) {
+                                    console.log(ele.data('full_info')['belongClass']);
+                                    let full_info = ele.data('full_info');
+                                    if (full_info['funcName'] === '<init>') {
+                                        return ele.data('full_info')['belongClass'] + ":" + ele.data('full_info')['belongClass'];
+                                    }
+                                    return ele.data('full_info')['belongClass'] + ":" + ele.data('full_info')['funcName'];
+                                },
                             }
                         },
                         {
@@ -1209,7 +1217,7 @@ $(function () {
                         {
                             selector: 'node[label]',
                             style: {
-                                'label': 'data(label)',
+
                                 'font-family': 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
                             }
                         },
@@ -1644,7 +1652,7 @@ $(function () {
                         graphData.nodes.push({
                             data: {
                                 id: 'n' + vertex.id.toString(),
-                                label: vertex.funcName,
+                                label: vertex.belongClass + vertex.funcName,
                                 parent: 'd' + domain.id.toString(),
                                 full_info: {
                                     belongPackage: vertex.belongPackage,
