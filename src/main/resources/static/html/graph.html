@@ -28,7 +28,7 @@
             font-style: normal;
         }
 
-        .noBorder {
+        .noBorder{
             border: 0;
             padding: 0 0 0 0;
             margin: 0 0 0 0;
@@ -506,7 +506,7 @@
             <li class="nav-item" style="padding-right: 60%">
                 <a class="nav-link" href="/workspace">MyProject</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item active" >
                 <a class="nav-link" href="#">Graph<span class="sr-only">(current)</span></a>
             </li>
         </ul>
@@ -523,17 +523,17 @@
 position: absolute;
 top: 0;
 left: 0;
-padding-top: 56px;
+padding-top: 50px;
 height: 100%;
-">
-    <table id="content-block" style="height: 100%;width: 100%">
-        <tr style="width: 100%">
-            <td class="noBorder" style="width: 15%;padding-top: 0">
+" >
+    <table id = "content-block" style="height: 100%;width: 100%">
+        <tr>
+            <td class="col-2 noBorder" style="width: 25%" >
                 <nav class=" bg-light sidebar sidebar-left overflow-auto" id="tree">
 
                 </nav>
             </td>
-            <td class="noBorder">
+            <td class="col-8 noBorder" style="width: 100%;">
                 <div class=" bg-white main-graph" id="graph-block">
                     <div id="tips"></div>
                     <div class="card" id="loading"
@@ -560,14 +560,13 @@ height: 100%;
                     <div id="cy_container"></div>
                 </div>
             </td>
-            <td class="noBorder" style="width: 15%">
+            <td class="col-2 noBorder" style="width:35%">
                 <nav class="bg-light sidebar sidebar-right overflow-auto" id="info-block">
 
                     <div class="card m-2 code-card">
                         <div class="h5 card-header" id="code-header">Code Block</div>
                         <div class="card-body">
-                            <pre class="bg-white my-0"
-                                 id="code-pre"><code>Click a node to get its code block.</code></pre>
+                            <pre class="bg-white my-0" id="code-pre"><code>Click a node to get its code block.</code></pre>
                         </div>
                     </div>
 
