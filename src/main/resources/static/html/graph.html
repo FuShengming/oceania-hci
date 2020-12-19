@@ -28,7 +28,7 @@
             font-style: normal;
         }
 
-        .noBorder{
+        .noBorder {
             border: 0;
             padding: 0 0 0 0;
             margin: 0 0 0 0;
@@ -495,7 +495,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0" style="height: 6%">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0" style="height: 56px">
     <a class="navbar-brand h1 m-0 col-2" href="/index">————👴 Oceania————</a>
 
     <div class="collapse navbar-collapse col-10 px-0">
@@ -506,7 +506,7 @@
             <li class="nav-item" style="padding-right: 60%">
                 <a class="nav-link" href="/workspace">MyProject</a>
             </li>
-            <li class="nav-item active" >
+            <li class="nav-item active">
                 <a class="nav-link" href="#">Graph<span class="sr-only">(current)</span></a>
             </li>
         </ul>
@@ -523,68 +523,69 @@
 position: absolute;
 top: 0;
 left: 0;
-padding-top: 40px;
+padding-top: 56px;
 height: 100%;
-" >
-    <table id = "content-block" style="height: 100%;width: 100%">
-    <tr >
-        <td class="col-2 noBorder" style="padding-top:0" >
-    <nav class=" bg-light sidebar sidebar-left overflow-auto" id="tree">
+">
+    <table id="content-block" style="height: 100%;width: 100%">
+        <tr style="width: 100%">
+            <td class="noBorder" style="width: 15%;padding-top: 0">
+                <nav class=" bg-light sidebar sidebar-left overflow-auto" id="tree">
 
-    </nav>
-        </td>
-        <td class="col-8 noBorder">
-    <div class=" bg-white main-graph" id="graph-block">
-        <div id="tips"></div>
-        <div class="card" id="loading"
-             style="z-index: 2;height: 100%;display: flex;align-items: center;justify-content: center;">
-            <div class="loader">
-                <div class="inner one"></div>
-                <div class="inner two"></div>
-                <div class="inner three"></div>
-            </div>
-            <p class="h4" style="position: absolute;top: calc(40% + 84px);">Loading...</p>
-        </div>
-        <div class="row" id="float_container">
-            <button class="btn btn-success btn-float" id="refresh-btn">
-                <i class="fa fa-refresh"></i></button>
-            <button class="btn btn-danger btn-float" id="layout-btn">
-                <i class="fa fa-arrows"></i></button>
-            <button class="btn btn-info btn-float" data-toggle="modal" data-target="#searchModal">
-                <i class="fa fa-search"></i></button>
-            <button class="btn btn-warning btn-float" data-toggle="modal" data-target="#filterModal">
-                <i class="fa fa-filter"></i></button>
-            <button class="btn btn-primary btn-float" data-toggle="modal" data-target="#infoModal">
-                <i class="fa fa-info"></i></button>
-        </div>
-        <div id="cy_container"></div>
-    </div>
-        </td>
-    <td class="col-2 noBorder" >
-        <nav class="bg-light sidebar sidebar-right overflow-auto" id="info-block">
-
-        <div class="card m-2 code-card">
-            <div class="h5 card-header" id="code-header">Code Block</div>
-            <div class="card-body">
-                <pre class="bg-white my-0" id="code-pre"><code>Click a node to get its code block.</code></pre>
-            </div>
-        </div>
-
-        <hr style="border-top: 2px dashed #999; width: 80%">
-
-        <div class="card m-2">
-            <h5 class="card-header">Label</h5>
-            <div class="card-body">
-                <div class="card-text">
-                    <p>Add labels to any nodes, edges or domains in the right-click menu.</p>
+                </nav>
+            </td>
+            <td class="noBorder">
+                <div class=" bg-white main-graph" id="graph-block">
+                    <div id="tips"></div>
+                    <div class="card" id="loading"
+                         style="z-index: 2;height: 100%;display: flex;align-items: center;justify-content: center;">
+                        <div class="loader">
+                            <div class="inner one"></div>
+                            <div class="inner two"></div>
+                            <div class="inner three"></div>
+                        </div>
+                        <p class="h4" style="position: absolute;top: calc(40% + 84px);">Loading...</p>
+                    </div>
+                    <div class="row" id="float_container">
+                        <button class="btn btn-success btn-float" id="refresh-btn">
+                            <i class="fa fa-refresh"></i></button>
+                        <button class="btn btn-danger btn-float" id="layout-btn">
+                            <i class="fa fa-arrows"></i></button>
+                        <button class="btn btn-info btn-float" data-toggle="modal" data-target="#searchModal">
+                            <i class="fa fa-search"></i></button>
+                        <button class="btn btn-warning btn-float" data-toggle="modal" data-target="#filterModal">
+                            <i class="fa fa-filter"></i></button>
+                        <button class="btn btn-primary btn-float" data-toggle="modal" data-target="#infoModal">
+                            <i class="fa fa-info"></i></button>
+                    </div>
+                    <div id="cy_container"></div>
                 </div>
-            </div>
-        </div>
+            </td>
+            <td class="noBorder" style="width: 15%">
+                <nav class="bg-light sidebar sidebar-right overflow-auto" id="info-block">
 
-        <div id="labels-container"></div>
-    </nav>
-    </td>
-    </tr>
+                    <div class="card m-2 code-card">
+                        <div class="h5 card-header" id="code-header">Code Block</div>
+                        <div class="card-body">
+                            <pre class="bg-white my-0"
+                                 id="code-pre"><code>Click a node to get its code block.</code></pre>
+                        </div>
+                    </div>
+
+                    <hr style="border-top: 2px dashed #999; width: 80%">
+
+                    <div class="card m-2">
+                        <h5 class="card-header">Label</h5>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <p>Add labels to any nodes, edges or domains in the right-click menu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="labels-container"></div>
+                </nav>
+            </td>
+        </tr>
     </table>
 </div>
 

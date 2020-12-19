@@ -1,6 +1,6 @@
 $(function () {
 
-$("#content-block").colResizable({ colReorder: true });
+    $("#content-block").colResizable({colReorder: true, minWidth: 300});
 
 
 });
