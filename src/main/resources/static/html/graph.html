@@ -28,6 +28,13 @@
             font-style: normal;
         }
 
+        .noBorder{
+            border: 0;
+            padding: 0 0 0 0;
+            margin: 0 0 0 0;
+            height: 100%;
+        }
+
         .card-header, .card-text {
             font-family: tekton-pro, arial, sans-serif;
             font-weight: 700;
@@ -267,7 +274,8 @@
 <script src="../js/typeahead.bundle.min.js"></script>
 <script type="text/javascript" src="../js/graphpage.js"></script>
 <script type="text/javascript" src="../js/navbar.js"></script>
-
+<script type="text/javascript" src="../js/colResizable-1.6.js"></script>
+<script type="text/javascript" src="../js/graphFlexibleFrame.js"></script>
 <!--LABEL-->
 <div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="labelModalLabel"
      aria-hidden="true">
@@ -517,11 +525,16 @@ top: 0;
 left: 0;
 padding-top: 40px;
 height: 100%;
-">
-    <nav class="col-2 bg-light sidebar sidebar-left overflow-auto" id="tree">
+" >
+    <table id = "content-block" style="height: 100%;width: 100%">
+    <tr >
+        <td class="col-2 noBorder" style="padding-top:0" >
+    <nav class=" bg-light sidebar sidebar-left overflow-auto" id="tree">
 
     </nav>
-    <div class="col-8 bg-white main-graph">
+        </td>
+        <td class="col-8 noBorder">
+    <div class=" bg-white main-graph" id="graph-block">
         <div id="tips"></div>
         <div class="card" id="loading"
              style="z-index: 2;height: 100%;display: flex;align-items: center;justify-content: center;">
@@ -546,7 +559,9 @@ height: 100%;
         </div>
         <div id="cy_container"></div>
     </div>
-    <nav class="col-2 bg-light sidebar sidebar-right overflow-auto">
+        </td>
+    <td class="col-2 noBorder" >
+        <nav class="bg-light sidebar sidebar-right overflow-auto" id="info-block">
 
         <div class="card m-2 code-card">
             <div class="h5 card-header" id="code-header">Code Block</div>
@@ -568,6 +583,9 @@ height: 100%;
 
         <div id="labels-container"></div>
     </nav>
+    </td>
+    </tr>
+    </table>
 </div>
 
 
