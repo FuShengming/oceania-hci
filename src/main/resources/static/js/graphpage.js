@@ -114,7 +114,7 @@ $(function () {
                     $("#labels-container").html(h);
                     $(".label-edit").on('click', function (event) {
                         let id = $(event.target).attr('labelId');
-                        $("#labelModal").attr("x-id", 'n' + id);
+                        $("#labelModal").attr("x-id", 'n' + vertexId);
                         $("#labelModal").attr("label-id",id);
                         $("#title-input").val($("#lt-" + id).text());
                         $("#content-input").val(htmlDecodeByRegExp($("#lc-" + id).html().replace(/<br>/g, "\n")));
@@ -190,7 +190,7 @@ $(function () {
                     $("#labels-container").html(h);
                     $(".label-edit").on('click', function (event) {
                         let id = $(event.target).attr('labelId');
-                        $("#labelModal").attr("x-id", 'n' + id);
+                        $("#labelModal").attr("x-id", 'e' + id);
                         $("#title-input").val($("#lt-" + id).text());
                         $("#content-input").val(htmlDecodeByRegExp($("#lc-" + id).html().replace(/<br>/g, "\n")));
                         $("#labelModal").modal('show');
@@ -266,7 +266,7 @@ $(function () {
                     $("#labels-container").html(h);
                     $(".label-edit").on('click', function (event) {
                         let id = $(event.target).attr('labelId');
-                        $("#labelModal").attr("x-id", 'n' + id);
+                        $("#labelModal").attr("x-id", 'd' + id);
                         $("#title-input").val($("#lt-" + id).text());
                         $("#content-input").val(htmlDecodeByRegExp($("#lc-" + id).html().replace(/<br>/g, "\n")));
                         $("#labelModal").modal('show');
