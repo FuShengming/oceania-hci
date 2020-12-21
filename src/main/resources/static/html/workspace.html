@@ -129,8 +129,8 @@
 <!--</div>-->
 <form class="modal fade multi-step" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
       aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog overflow-auto" role="document" >
+        <div class="modal-content" >
             <div class="modal-header">
                 <h3 class="modal-title step-1" data-step="1">Upload New Project - 1</h3>
                 <h3 class="modal-title step-2" data-step="2">Upload New Project - 2</h3>
@@ -147,7 +147,7 @@
             </div>
             <div class="modal-body step step-2">
                 <h4>Upload Your Project Codes</h4>
-                <div class="dropzone dz-clickable" id="codeDrop">
+                <div class="dropzone dz-clickable" id="codeDrop" style="max-height: 40em;overflow: auto;">
                     <div class="dz-message" data-dz-message="">
                         <span>Drop files here or click to upload.</span>
                     </div>
