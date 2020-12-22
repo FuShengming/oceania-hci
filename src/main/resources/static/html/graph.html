@@ -276,6 +276,9 @@
 <script type="text/javascript" src="../js/navbar.js"></script>
 <script type="text/javascript" src="../js/colResizable-1.6.js"></script>
 <script type="text/javascript" src="../js/graphFlexibleFrame.js"></script>
+<script>
+    $(function () { $(".tooltip-options button").tooltip({html : true });});
+</script>
 <!--LABEL-->
 <div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="labelModalLabel"
      aria-hidden="true">
@@ -500,10 +503,13 @@
                 <a class="nav-link" href="#">Graph<span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <div class="d-flex">
-            <button class="btn btn-outline-light mx-2" id="save-btn">Save</button>
-            <button class="btn btn-outline-light mx-2" id="export-btn">Export</button>
+        <div class="d-flex tooltip-options">
+            <button class="btn btn-outline-light mx-2 " id="save-btn"
+                    data-toggle="tooltip" data-placement="bottom"  title="<p>click this button to save the current layout of this graph.</p>">Save Layout</button>
+            <button class="btn btn-outline-light mx-2" id="export-btn"
+                    data-toggle="tooltip" data-placement="bottom"  title="<p>click this button to download a screenshot picture of the whole graph.</p>">Screenshot</button>
             <button class="btn btn-outline-light mx-2" id="sign-out-btn">Sign Out</button>
+
         </div>
 
     </div>
@@ -535,16 +541,26 @@ height: 100%;
                         </div>
                         <p class="h4" style="position: absolute;top: calc(40% + 84px);">Loading...</p>
                     </div>
-                    <div class="row" id="float_container">
+                    <div class="row tooltip-options" id="float_container">
 
-                        <button class="btn btn-success btn-float" id="layout-btn">
+                        <button class="btn btn-success btn-float" id="layout-btn"
+                                data-toggle="tooltip" data-placement="left"  title="<p>click this button to refresh the position of the graph</p>">
                             <i class="fa fa-refresh"></i></button>
-                        <button class="btn btn-info btn-float" data-toggle="modal" data-target="#searchModal">
-                            <i class="fa fa-search"></i></button>
-                        <button class="btn btn-warning btn-float" data-toggle="modal" data-target="#filterModal">
-                            <i class="fa fa-filter"></i></button>
-                        <button class="btn btn-primary btn-float" data-toggle="modal" data-target="#infoModal">
-                            <i class="fa fa-info"></i></button>
+                        <a  data-toggle="tooltip" data-placement="left" title="<p>click this button to refresh the position of the graph</p>">
+                            <button class="btn btn-info btn-float" data-toggle="modal" data-target="#searchModal">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="left" title="<p>click this button to filter &ensp;&ensp;some redundant vertices &ensp;and edges.</p>">
+                            <button class="btn btn-warning btn-float" data-toggle="modal" data-target="#filterModal">
+                                <i class="fa fa-filter"></i>
+                            </button>
+                        </a>
+                        <a  data-toggle="tooltip"  data-placement="left" title="<p>click this button to see information of this graph</p>">
+                            <button class="btn btn-primary btn-float" data-toggle="modal" data-target="#infoModal">
+                                <i class="fa fa-info"></i>
+                            </button>
+                        </a>
                     </div>
                     <div id="cy_container"></div>
                 </div>
@@ -561,8 +577,11 @@ height: 100%;
 
                     <hr class="mb-4" style="border-top: 2px solid #999; width: 80%">
 
-                    <h5 class="mx-4" style="padding: 0 4px 0 4px">Label</h5>
-                    <div class="card-text mx-4" style="padding: 0 4px 0 4px">
+                    <div>
+                        <div style="float: left; margin-right: 50px"><h5 class="mx-4" style="padding: 10px 4px 0 4px">Label</h5></div>
+                        <div style="float: right"><button type="button" class="btn btn-primary" style="border-width: 1px;border-color: #373a3c;margin:6px 50px 0 0;height: 35px">Add</button></div>
+                    </div>
+                    <div class="card-text mx-4" style="padding: 0 4px 0 4px; margin-top: 70px">
                         <p>Add labels to any nodes, edges or domains in the right-click menu.</p>
                     </div>
 
