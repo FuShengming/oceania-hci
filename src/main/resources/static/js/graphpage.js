@@ -38,6 +38,7 @@ $(function () {
         // localStorage.removeItem("codeId");
         return true;
     });
+    let ownCode = true;
     let userId = localStorage['userId'];
     if (userId === undefined) window.location.href = "/login";
     let url = document.location.toString();
@@ -105,8 +106,8 @@ $(function () {
                             htmlEncodeByRegExp(label.content).replace(/\n/g, "<br>") +
                             "</div>\n" +
                             "<div class=\"mt-3\" style=\"text-align: right\">\n" +
-                            "<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n" +
-                            "<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n" +
+                            (ownCode ? ("<button class=\"btn btn-info label-edit\" " + " labelId=" + label.id + ">Edit</button>\n") : "") +
+                            (ownCode ? ("<button class=\"btn btn-danger label-del\" " + " labelId=" + label.id + ">Delete</button>\n") : "") +
                             "</div>\n" +
                             "</div>\n" +
                             "</div>";
@@ -115,7 +116,7 @@ $(function () {
                     $(".label-edit").on('click', function (event) {
                         let id = $(event.target).attr('labelId');
                         $("#labelModal").attr("x-id", 'n' + vertexId);
-                        $("#labelModal").attr("label-id",id);
+                        $("#labelModal").attr("label-id", id);
                         $("#title-input").val($("#lt-" + id).text());
                         $("#content-input").val(htmlDecodeByRegExp($("#lc-" + id).html().replace(/<br>/g, "\n")));
                         $("#labelModal").modal('show');
@@ -1268,8 +1269,8 @@ $(function () {
                     },
 
                     wheelSensitivity: 0.5,
-                    minZoom:0.08,
-                    maxZoom:2.00
+                    minZoom: 0.08,
+                    maxZoom: 2.00
                 });
                 setCyStyle();
                 refresh();
@@ -1372,15 +1373,15 @@ $(function () {
     //导航栏显示code名称
     $.ajax({
         type: "get",
-        url: "code/getCodeInfo/"+codeId,
+        url: "code/getCodeInfo/" + codeId,
         headers: {"Authorization": $.cookie('token')},
         dataType: "json",
         contentType: "application/json",
         success: function (data) {
-            if(data.success === true){
+            if (data.success === true) {
                 let codeName = data.content.name;
                 console.log(codeName);
-                $("#graph-body").prepend("<button id='code-name' class='btn code-name' >Project: "+codeName+"</button>");
+                $("#graph-body").prepend("<button id='code-name' class='btn code-name' >Project: " + codeName + "</button>");
             }
         },
         error: function (err) {
@@ -1393,7 +1394,7 @@ $(function () {
     //当用户查看不属于自己的代码时
     $.ajax({
         type: "get",
-        url: "code/getCodeInfo/"+codeId,
+        url: "code/getCodeInfo/" + codeId,
         headers: {"Authorization": $.cookie('token')},
         dataType: "json",
         contentType: "application/json",
@@ -1402,7 +1403,7 @@ $(function () {
 
             $.ajax({
                 type: "get",
-                url: "user/getUserName/"+codeData.content.userId,
+                url: "user/getUserName/" + codeData.content.userId,
                 headers: {"Authorization": $.cookie('token')},
                 dataType: "json",
                 contentType: "application/json",
@@ -1411,26 +1412,25 @@ $(function () {
 
                     $.ajax({
                         type: "get",
-                        url: "statistics/getCodeMesVO/"+codeId,
+                        url: "statistics/getCodeMesVO/" + codeId,
                         headers: {"Authorization": $.cookie('token')},
                         dataType: "json",
                         contentType: "application/json",
                         success: function (data) {
-                            if( authorData.success!==true){
+                            if (authorData.success !== true) {
                                 alert(authorData.message);
-                            }
-                            else if(data.success===false){
+                            } else if (data.success === false) {
                                 alert(data.message);
-                            }
-                            else if(codeData.success === true&&codeData.content.userId!==userId){
-                                let navbar =  $("#top-navbar");
+                            } else if (codeData.success === true && codeData.content.userId !== userId) {
+                                ownCode = false;
+                                let navbar = $("#top-navbar");
                                 let children = navbar.children("div");
                                 let len = children.length;
-                                for(let i = 0;i<len;i++){
+                                for (let i = 0; i < len; i++) {
                                     children[i].remove();
                                 }
                                 let codeStatistics = data;
-                                if(codeStatistics.length!==6){
+                                if (codeStatistics.length !== 6) {
                                     alert("statistics error.");
                                 }
                                 let numOfVertex = data[0];
@@ -1438,25 +1438,24 @@ $(function () {
                                 let numOfDomain = data[4];
                                 navbar.append("<div class=\"collapse navbar-collapse col-10 px-0\">\n" +
                                     "<div class='d-flex ml-auto' style='color: #dee2e6;font-size: 20px'>" +
-                                    "<label  style='margin: 0.1rem 3rem 0 2rem; color: white;font-size: 24px'>Author:&ensp;"+authorData.content+"</label>" +
-                                    "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>vertex:"+numOfVertex.toString()+"</label>" +
-                                    "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>edge:"+numOfEdge.toString()+"</label>" +
-                                    "<label  style='margin: 0.3rem 2rem 0 1rem'>Domain:"+numOfDomain.toString()+"</label>" +
+                                    "<label  style='margin: 0.1rem 3rem 0 2rem; color: white;font-size: 24px'>Author:&ensp;" + authorData.content + "</label>" +
+                                    "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>vertex:" + numOfVertex.toString() + "</label>" +
+                                    "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>edge:" + numOfEdge.toString() + "</label>" +
+                                    "<label  style='margin: 0.3rem 2rem 0 1rem'>Domain:" + numOfDomain.toString() + "</label>" +
                                     "<button class='btn btn-primary ' style='color: white;margin-right: 15px;border-width: 1px;border-color: #dee2e6'>Clone to my project</button>" +
                                     "</div>" +
                                     "</div>");
 
                                 $("#label-hint").text("Click one vertex on the graph to see its labels.");
-                                $(".label-edit").hide();
-                                $(".label-del").hide();
+                                $("canvas").on('mousedown', function (e) {
+                                    return e.button !== 2;
+                                });
                             }
                         },
                         error: function (err) {
                             console.log(err);
                         }
                     });
-
-
 
 
                 },
@@ -1466,13 +1465,11 @@ $(function () {
             });
 
 
-
         },
         error: function (err) {
             console.log(err);
         }
     });
-
 
 
 });
