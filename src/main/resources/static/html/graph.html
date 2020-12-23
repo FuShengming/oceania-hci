@@ -28,6 +28,27 @@
             font-style: normal;
         }
 
+        .code-name{
+            position: absolute;
+            font-size:20px;
+            padding: 0 5px 0 5px;
+
+            font-family: fira-sans, sans-serif;
+            border-color: #373a3c;
+            border-radius: 4px;
+            margin-left: 10px;
+            white-space:nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            top: 1%;
+            left: 0%;
+            width: fit-content;
+            max-width: 300px;
+            height: 35px;
+            border-width: 2px;
+            align-content: flex-start;
+        }
+
         .noBorder{
             border: 0;
             padding: 0 0 0 0;
@@ -489,12 +510,12 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0" style="height: 56px" >
- <a class="navbar-brand h1 m-0 col-1" href="/index" style="font-size: 30px" id="logo"><i class="fa fa-code" style="font-weight: 900;" ></i> Oceania</a>
+ <a class="navbar-brand h1 m-0 col-2" href="/index" style="font-size: 30px" id="logo"><i class="fa fa-code" style="font-weight: 900;" ></i> Oceania</a>
 
-    <div class="collapse navbar-collapse col-9 px-0">
-        <ul class="navbar-nav mr-auto" >
+    <div class="collapse navbar-collapse col-10 px-0">
+        <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item" style="padding-right: 65%;padding-left: 50%">
+            <li class="nav-item" style="padding-right: 65%;padding-left: 150%">
                 <a class="nav-link" href="/index">Home</a>
             </li>
             <li class="nav-item" style="padding-right: 60%">
@@ -504,7 +525,7 @@
                 <a class="nav-link" href="#">Graph<span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <div class="d-flex tooltip-options">
+        <div class="d-flex tooltip-options" >
             <button class="btn btn-outline-light mx-2 " id="save-btn"
                     data-toggle="tooltip" data-placement="bottom"  title="<p>click this button to save the current layout of this graph.</p>">Save Layout</button>
             <button class="btn btn-outline-light mx-2" id="export-btn"
@@ -530,7 +551,7 @@ height: 100%;
 
                 </nav>
             </td>
-            <td class="col-8 noBorder" style="width: 100%;">
+            <td class="col-8 noBorder" style="width: 100%;" id="graph-body">
                 <div class=" bg-white main-graph" id="graph-block">
                     <div id="tips"></div>
                     <div class="card" id="loading"

@@ -1380,8 +1380,8 @@ $(function () {
             if(data.success === true){
                 let codeName = data.content.name;
                 console.log(codeName);
-                $("#logo").after(" <label class=\"navbar-brand h2 col-2\"  style=\"font-size:20px;margin-left: 50px;font-family: -apple-system;overflow: hidden;text-overflow:ellipsis\">Project: "+codeName+"</label>");
-
+                $("#graph-body").prepend("<button id='code-name' class='btn code-name' >Project: "+codeName+"</button>");
+                $("#code-name").at
             }
         },
         error: function (err) {
