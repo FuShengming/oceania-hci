@@ -32,6 +32,11 @@ public class CodeController {
         return codeBL.delete(userAndCodeForm);
     }
 
+    @RequestMapping(value = "/getCodeInfo/{codeId}")
+    public ResponseVO getCodeInfo(@PathVariable int codeId) {
+        return codeBL.getCodeInfo(codeId);
+    }
+
     @RequestMapping(value = "/modifyName")
     public ResponseVO modifyName(@RequestBody CodeIdAndUserIdAndNameForm codeIdAndUserIdAndNameForm) {
         return codeBL.modifyName(codeIdAndUserIdAndNameForm);

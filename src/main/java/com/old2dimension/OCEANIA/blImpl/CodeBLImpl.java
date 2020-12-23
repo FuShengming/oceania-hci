@@ -56,6 +56,15 @@ public class CodeBLImpl implements CodeBL {
         }
     }
 
+    @Override
+    public ResponseVO getCodeInfo(int codeId) {
+        Code code = codeRepository.findCodeById(codeId);
+        if(code == null){
+            return ResponseVO.buildFailure("no such code");
+        }
+        return ResponseVO.buildSuccess(code);
+    }
+
     public ResponseVO delete(UserAndCodeForm userAndCodeForm) {
         Code code = codeRepository.findCodeByIdAndUserId(userAndCodeForm.getCodeId(), userAndCodeForm.getUserId());
         if (code == null) {

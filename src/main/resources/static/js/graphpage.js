@@ -1369,6 +1369,25 @@ $(function () {
         });
     });
 
+    //导航栏显示code名称
+    $.ajax({
+        type: "get",
+        url: "code/getCodeInfo/"+codeId,
+        headers: {"Authorization": $.cookie('token')},
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+            if(data.success === true){
+                let codeName = data.content.name;
+                console.log(codeName);
+                $("#logo").after(" <label class=\"navbar-brand h2 col-2\"  style=\"font-size:20px;margin-left: 50px;font-family: -apple-system;overflow: hidden;text-overflow:ellipsis\">Project: "+codeName+"</label>");
+
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
     //code on the right sidebar
     //labels on the right sidebar
 });

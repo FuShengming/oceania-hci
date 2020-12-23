@@ -13,4 +13,6 @@ public interface CodeBL {
     ResponseVO delete(UserAndCodeForm userAndCodeForm);
 
     ResponseVO modifyName(CodeIdAndUserIdAndNameForm codeIdAndUserIdAndNameForm);
+
+    ResponseVO getCodeInfo(int codeId);
 }
