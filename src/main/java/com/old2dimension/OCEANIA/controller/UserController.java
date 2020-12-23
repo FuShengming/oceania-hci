@@ -42,8 +42,14 @@ public class UserController {
         return r;
     }
 
-//    @RequestMapping("/getAll")
-//    public ResponseVO getAll
+    @RequestMapping("/getUserName/{userId}")
+    public ResponseVO getUserName(@PathVariable int userId){
+        User user = userBL.findUserById(userId);
+        if(user==null){
+            return ResponseVO.buildFailure("no such user");
+        }
+        return ResponseVO.buildSuccess(user.getName());
+    }
 
 
 }

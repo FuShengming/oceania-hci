@@ -1381,7 +1381,6 @@ $(function () {
                 let codeName = data.content.name;
                 console.log(codeName);
                 $("#graph-body").prepend("<button id='code-name' class='btn code-name' >Project: "+codeName+"</button>");
-                $("#code-name").at
             }
         },
         error: function (err) {
@@ -1390,4 +1389,90 @@ $(function () {
     });
     //code on the right sidebar
     //labels on the right sidebar
+
+    //当用户查看不属于自己的代码时
+    $.ajax({
+        type: "get",
+        url: "code/getCodeInfo/"+codeId,
+        headers: {"Authorization": $.cookie('token')},
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+            let codeData = data;
+
+            $.ajax({
+                type: "get",
+                url: "user/getUserName/"+codeData.content.userId,
+                headers: {"Authorization": $.cookie('token')},
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    let authorData = data;
+
+                    $.ajax({
+                        type: "get",
+                        url: "statistics/getCodeMesVO/"+codeId,
+                        headers: {"Authorization": $.cookie('token')},
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (data) {
+                            if( authorData.success!==true){
+                                alert(authorData.message);
+                            }
+                            else if(data.success===false){
+                                alert(data.message);
+                            }
+                            else if(codeData.success === true&&codeData.content.userId!==userId){
+                                let navbar =  $("#top-navbar");
+                                let children = navbar.children("div");
+                                let len = children.length;
+                                for(let i = 0;i<len;i++){
+                                    children[i].remove();
+                                }
+                                let codeStatistics = data;
+                                if(codeStatistics.length!==6){
+                                    alert("statistics error.");
+                                }
+                                let numOfVertex = data[0];
+                                let numOfEdge = data[2];
+                                let numOfDomain = data[4];
+                                navbar.append("<div class=\"collapse navbar-collapse col-10 px-0\">\n" +
+                                    "<div class='d-flex ml-auto' style='color: #dee2e6;font-size: 20px'>" +
+                                    "<label  style='margin: 0.1rem 3rem 0 2rem; color: white;font-size: 24px'>Author:&ensp;"+authorData.content+"</label>" +
+                                    "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>vertex:"+numOfVertex.toString()+"</label>" +
+                                    "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>edge:"+numOfEdge.toString()+"</label>" +
+                                    "<label  style='margin: 0.3rem 2rem 0 1rem'>Domain:"+numOfDomain.toString()+"</label>" +
+                                    "<button class='btn btn-primary ' style='color: white;margin-right: 15px;border-width: 1px;border-color: #dee2e6'>Clone to my project</button>" +
+                                    "</div>" +
+                                    "</div>");
+
+                                $("#label-hint").text("Click one vertex on the graph to see its labels.");
+                                $(".label-edit").hide();
+                                $(".label-del").hide();
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+
+
+
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+
+
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+
+
+
 });

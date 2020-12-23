@@ -124,7 +124,7 @@ public class CodeBLImpl implements CodeBL {
 
     @Override
     public ResponseVO getFuncCode(VertexVOAndUserIdAndCodeId vertexVOAndUserIdAndCodeId) {
-        Code code = codeRepository.findCodeByIdAndUserId(vertexVOAndUserIdAndCodeId.getCodeId(), vertexVOAndUserIdAndCodeId.getUserId());
+        Code code = codeRepository.findCodeById(vertexVOAndUserIdAndCodeId.getCodeId());
         if (code == null) {
             return ResponseVO.buildFailure("no such user or code");
         }
