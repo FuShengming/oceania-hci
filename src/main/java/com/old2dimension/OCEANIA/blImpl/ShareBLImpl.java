@@ -1,18 +1,14 @@
 package com.old2dimension.OCEANIA.blImpl;
 
 import com.old2dimension.OCEANIA.bl.ShareBL;
-import com.old2dimension.OCEANIA.dao.CodeRepository;
-import com.old2dimension.OCEANIA.dao.VertexLabelRepository;
-import com.old2dimension.OCEANIA.dao.EdgeLabelRepository;
-import com.old2dimension.OCEANIA.dao.DomainLabelRepository;
-import com.old2dimension.OCEANIA.po.Code;
-import com.old2dimension.OCEANIA.po.DomainLabel;
-import com.old2dimension.OCEANIA.po.EdgeLabel;
-import com.old2dimension.OCEANIA.po.VertexLabel;
+import com.old2dimension.OCEANIA.dao.*;
+import com.old2dimension.OCEANIA.po.*;
 import com.old2dimension.OCEANIA.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
@@ -28,6 +24,9 @@ public class ShareBLImpl implements ShareBL {
     EdgeLabelRepository edgeLabelRepository;
     @Autowired
     DomainLabelRepository domainLabelRepository;
+
+    @Autowired
+    WorkPlaceRepository workPlaceRepository;
 
     public void setCodeRepository(CodeRepository codeRepository) {
         this.codeRepository = codeRepository;
@@ -86,20 +85,79 @@ public class ShareBLImpl implements ShareBL {
                     domainLabelRepository.save(d2);
                 }
             }
+            //
+            //搬运workspace
+            WorkSpace workSpace = workPlaceRepository.findLatestWorkSpace(oldUserId,oldCodeId);
+            if(workSpace != null){
+                WorkSpace newWorkSpace = new WorkSpace();
+                newWorkSpace.setUserId(newUserId);
+                newWorkSpace.setDate(workSpace.getDate());
+                newWorkSpace.setCloseness(workSpace.getCloseness());
+                newWorkSpace.setCodeId(newCodeId);
+                newWorkSpace.setCyInfo(workSpace.getCyInfo());
+                newWorkSpace = workPlaceRepository.save(newWorkSpace);
+                if(newWorkSpace.getId()==0){
+                    return ResponseVO.buildFailure("clone layout failed.");
+                }
+            }
+
+
+
             //复制文件
             File oldDependency = new File("src/main/resources/dependencies/" + oldCodeId + ".txt");
             File newDependency = new File("src/main/resources/dependencies/" + newCodeId + ".txt");
             File oldJar = new File("src/main/resources/jars/" + oldCodeId + ".jar");
             File newJar = new File("src/main/resources/jars/" + newCodeId + ".jar");
+
+            File oldCodeFile = new File("src/main/resources/analyzeCode/src/"+ oldCodeId);
+            File newCodeFile = new File("src/main/resources/analyzeCode/src/"+ newCodeId);
+
             Files.copy(oldDependency.toPath(), newDependency.toPath());
             Files.copy(oldJar.toPath(), newJar.toPath());
+            folderCopy(oldCodeFile,newCodeFile);
 
 //            return ResponseVO.buildSuccess(testVertexLabels);
             return ResponseVO.buildSuccess(res);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseVO.buildFailure("note failed");
+            return ResponseVO.buildFailure("clone failed");
         }
 
+    }
+
+    private static void folderCopy(File srcFolder, File targetFolder) {
+        try {
+            //判断目标文件夹是否存在
+            if (!targetFolder.exists()) {
+                targetFolder.mkdir();
+            }
+            //获得源文件夹所有子文件
+            File[] srcFiles = srcFolder.listFiles();
+            assert srcFiles != null;
+            for (File srcFile : srcFiles) {
+                //创建复制目标文件
+                File targetFile = new File(targetFolder.getAbsoluteFile() + "/" + srcFile.getName());
+                if (!srcFile.isFile()) {
+                    //源文件为文件夹，目标文件创建文件夹
+                    targetFile.mkdir();
+                    //递归
+                    folderCopy(srcFile, targetFile);
+                } else {
+                    //不是文件夹，复制该文件(此处可以抽取为赋值文件方法)
+                    FileInputStream fis = new FileInputStream(srcFile);
+                    FileOutputStream fos = new FileOutputStream(targetFile);
+                    byte[] bytes = new byte[1024 * 8];
+                    int len = fis.read(bytes);
+                    while (len != -1) {
+                        fos.write(bytes, 0, len);
+                        len = fis.read(bytes);
+                    }
+                    fis.close();
+                    fos.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

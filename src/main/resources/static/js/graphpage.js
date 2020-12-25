@@ -1421,7 +1421,8 @@ $(function () {
                                 alert(authorData.message);
                             } else if (data.success === false) {
                                 alert(data.message);
-                            } else if (codeData.success === true && codeData.content.userId !== userId) {
+                            } else if (codeData.success === true && codeData.content.userId.toString() !== userId.toString()) {
+                                $(window).unbind();
                                 ownCode = false;
                                 let navbar = $("#top-navbar");
                                 let children = navbar.children("div");
@@ -1442,7 +1443,7 @@ $(function () {
                                     "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>vertex:" + numOfVertex.toString() + "</label>" +
                                     "<label class='mx-2' style='margin-bottom: 0;margin-top: 0.3rem'>edge:" + numOfEdge.toString() + "</label>" +
                                     "<label  style='margin: 0.3rem 2rem 0 1rem'>Domain:" + numOfDomain.toString() + "</label>" +
-                                    "<button class='btn btn-primary ' style='color: white;margin-right: 15px;border-width: 1px;border-color: #dee2e6'>Clone to my project</button>" +
+                                    "<button class='btn btn-primary ' style='color: white;margin-right: 15px;border-width: 1px;border-color: #dee2e6' id='clone-btn' data-toggle='modal' data-target='#cloneModal'>Clone to my project</button>" +
                                     "</div>" +
                                     "</div>");
 
@@ -1471,5 +1472,41 @@ $(function () {
         }
     });
 
+    $("#clone-submit").on("click",function () {
+        $.ajax(
+            {
+                type: "post",
+                url: "share/acceptSharedProject" ,
+                headers: {"Authorization": $.cookie('token')},
+                dataType: "json",
+                data:JSON.stringify(
+                    {
+                        userId: userId,
+                        codeId: codeId
+                    }
+                ),
+                contentType: "application/json",
+                success: function (data) {
+                    if(data.success.toString()!==true.toString()){
+                        alert("Fail to clone this project!");
+                    }
+                    else{
+                        $("#cloneModal").modal('hide');
+                        $("#cloneIdentifyModal").modal('show');
+                        $("#clone-identify").on("click",function () {
+                            $("#cloneIdentifyModal").modal('hide');
+                            window.location.href = "/workspace";
+                        });
+
+                    }
+
+                },
+                error: function (err) {
+                    alert("Fail to clone this project!");
+                    console.log(err);
+                }
+            }
+        )
+    });
 
 });
