@@ -66,6 +66,91 @@
         border: 2px dashed rgba(0, 0, 0, 0.3);
         border-radius: 1rem;
     }
+
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+
+    .card-body .card-block {
+        vertical-align: top;
+        position: relative;
+        display: inline-block;
+        border-radius: 3px;
+        min-width: 130px;
+        max-width: 200px;
+        min-height: 130px;
+        margin-right: 16px;
+        margin-bottom: 15px;
+        transition: all .4s;
+        -webkit-transition: all .4s;
+        z-index: 1;
+    }
+
+    .card-body .card-block:hover {
+        z-index: 2;
+        transform: translateY(-4px);
+    }
+
+    .card-block .code-image-container {
+        position: relative;
+    }
+
+    .card-block .code-title {
+        text-align: left;
+        padding-left: 2px;
+        display: block;
+        font-size: 12px;
+        margin-top: 4px;
+        line-height: 16px;
+        max-height: 32px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .code-title .code-icon {
+        margin-right: 6px;
+        vertical-align: -1px;
+        cursor: pointer;
+    }
+
+    .code-image-container img {
+        display: block;
+        min-height: 173px;
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+        border-bottom: 0;
+    }
+
+    .card-block a {
+        font-size: 18px;
+    }
+
+    .card-block label {
+        cursor: pointer;
+    }
+
+    .code-tool input {
+        width: 100px;
+        border: 0;
+        border-bottom: 1px solid #999999;
+        outline: 0;
+        margin-bottom: .8rem;
+        margin-top: auto;
+        font-size: 18px;
+    }
+
+    .code-tool button:focus {
+        outline: none;
+        box-shadow: none;
+    }
 </style>
 <body>
 <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel"
@@ -217,23 +302,29 @@
         <div class="card m-2">
             <div class="card-body">
                 <div class="card-title d-flex justify-content-between">
-                    <h2>My Projects</h2>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#uploadModal" id="upload-btn">
-                        <span class="fa fa-plus-square mr-2"></span>New
-                    </button>
+                    <div class="d-flex justify-content-start">
+                        <h2>My Projects</h2>
+                        <button class="btn btn-primary mb-auto ml-2" data-toggle="modal" data-target="#uploadModal" id="upload-btn">
+                            <span class="fa fa-plus-square mr-2"></span>New
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-end code-tool">
+                        <input type="text" id="search-input">
+                        <button type="button" class="btn btn-default" id="search-button" aria-label="Search">
+                            <svg class="icon">
+                                <use xlink:href="#icon-sousuo"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="btn btn-default" id="list-view-button" data-toggle="tooltip"
+                                data-placement="bottom" title="<p>Change List View</p>">
+                            <svg class="icon">
+                                <use xlink:href="#icon-liebiao1" id="list-view-changer"></use>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="card-text">
-                    <table class="table table-hover" id="code-table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Last Update</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody id="code-tb"></tbody>
-                    </table>
-                </div>
+                <div class="card-text"></div>
+                <div class="card-blocks"></div>
             </div>
         </div>
     </div>
@@ -247,6 +338,7 @@
 <script type="text/javascript" src="webjars/bootstrap/4.4.1-1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/dropzone.min.js"></script>
 <script type="text/javascript" src="../js/multi-step-modal.js"></script>
+<script src="//at.alicdn.com/t/font_2292766_jkfqeab65tb.js"></script>
 <script type="text/javascript" src="../js/navbar.js"></script>
 <script>
     let uuid = function () {
@@ -269,8 +361,10 @@
             return "" + this.options.paramName;
         }
     };
+    $(".code-tool button").tooltip({html: true});
     $(function () {
         let userId = localStorage['userId'];
+        let codes = [];
         if (userId === undefined) window.location.href = "/login";
 
         $("#cancel-btn").on('click', function () {
@@ -299,6 +393,36 @@
                 });
             }
         });
+
+        $("#search-input").on('input', function () {
+            if ($("#list-view-changer").attr("xlink:href") === "#icon-liebiao1") {
+                renderListView($("#search-input").val());
+            }
+            else {
+                renderBlockView($("#search-input").val());
+            }
+        });
+
+        $("#search-button").on('click', function () {
+            if ($("#list-view-changer").attr("xlink:href") === "#icon-liebiao1") {
+                renderListView($("#search-input").val());
+            }
+            else {
+                renderBlockView($("#search-input").val());
+            }
+        });
+
+        $("#list-view-button").on('click', function () {
+            if ($("#list-view-changer").attr("xlink:href") === "#icon-liebiao1") {
+                renderBlockView();
+                $("#list-view-changer").attr("xlink:href", "#icon-liebiao");
+            }
+            else {
+                renderListView();
+                $("#list-view-changer").attr("xlink:href", "#icon-liebiao1");
+            }
+        });
+
         $("#cont-1").on('click', function () {
             let sel_event = new CustomEvent('next.m.2', {detail: {step: 2}});
             window.dispatchEvent(sel_event);
@@ -442,35 +566,17 @@
                 // },
                 success: function (data) {
                     if (data.success) {
-                        let h = "";
-                        let codes = data.content;
-                        codes.forEach(function (code) {
-                            console.log(code);
-                            h += `<tr class="clickable-row" code-id="${code.codeId}">
-                                <td>${code.codeName}</td>
-                                <td>${code.date === null ? "Never" : new Date(Date.parse(code.date)).toLocaleString("en")}</td>
-                                <td class="td-btn">
-                                    <button class="btn btn-light btn-setting px-0" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h setting-icon"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item modify-name" href="#" code-id="${code.codeId}">Modify Name</a>
-                                        <a class="dropdown-item rmv" href="#" code-id="${code.codeId}">Remove</a>
-                                    </div>
-                                </td>
-                            </tr>`
+                        codes = data.content;
+                        renderListView();
+                        $(".card-block").on('click', function (e) {
+                            console.log('click', $(this).attr("code-id"));
+                            // localStorage.setItem('codeId', $(this).attr("code-id"));
+                            window.location.href = "/graph?code=" + $(this).attr("code-id");
                         });
-                        $("#code-tb").html(h);
-                        $(".clickable-row").on('click', function (e) {
-                            if (!$(e.target).hasClass("btn-setting") &&
-                                !$(e.target).hasClass("setting-icon") &&
-                                !$(e.target).hasClass("dropdown-menu") &&
-                                !$(e.target).hasClass("dropdown-item")) {
-                                console.log('click', $(this).attr("code-id"));
-                                // localStorage.setItem('codeId', $(this).attr("code-id"));
-                                window.location.href = "/graph?code=" + $(this).attr("code-id");
-                            }
+                        $(".card-block").on('click', function (e) {
+                            console.log('click', $(this).attr("code-id"));
+                            // localStorage.setItem('codeId', $(this).attr("code-id"));
+                            window.location.href = "/graph?code=" + $(this).attr("code-id");
                         });
                         $(".rmv").on('click', function () {
                             let codeId = $(this).attr("code-id");
@@ -539,6 +645,84 @@
         };
 
         getCodesByUserId();
+
+        let renderListView = function (name="") {
+            let list = [];
+            codes.forEach(function (code) {
+                if (code.codeName.toLowerCase().indexOf(name.toLowerCase()) !== -1) {
+                    list.push(code);
+                }
+            });
+
+            $(".card-blocks").empty();
+            $(".card-text").empty().html(`<table class="table table-hover" id="code-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Last Update</th>
+                            <th scope="col" style="width: 186px">Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody id="code-tb"></tbody>
+                    </table>`);
+            let h = "";
+            list.forEach(function (code) {
+                console.log(code);
+                h += `<tr class="clickable-row" code-id="${code.codeId}" style="cursor: pointer">
+                                <td>${code.codeName}</td>
+                                <td>${code.date === null ? "---" : new Date(Date.parse(code.date)).toLocaleString("en")}</td>
+                                <td class="td-btn">
+                                    <button class="btn btn-sm btn-info modify-name" href="#" code-id="${code.codeId}">Rename</button>
+                                    <button class="btn btn-sm btn-danger rmv" href="#" code-id="${code.codeId}">Remove</button>
+                                </td>
+                            </tr>`
+            });
+            $("#code-tb").html(h);
+            $(".clickable-row").on('click', function (e) {
+                if (!$(e.target).hasClass("btn-setting") &&
+                    !$(e.target).hasClass("setting-icon") &&
+                    !$(e.target).hasClass("btn")) {
+                    console.log('click', $(this).attr("code-id"));
+                    // localStorage.setItem('codeId', $(this).attr("code-id"));
+                    window.location.href = "/graph?code=" + $(this).attr("code-id");
+                }
+            });
+        };
+
+        let renderBlockView = function (name="") {
+            let list = [];
+            codes.forEach(function (code) {
+                if (code.codeName.toLowerCase().indexOf(name.toLowerCase()) !== -1) {
+                    list.push(code);
+                }
+            });
+
+            $(".card-text").empty();
+            let h = "<h5>Codes</h5>";
+            list.forEach(function (code) {
+                console.log(code);
+                h += `<div class="card-block" code-id="${code.codeId}">
+                    <div class="code-image-container">
+                        <img src="https://assets.processon.com/chart_image/thumb/5e776738e4b011fccea7a0a4.png">
+                    </div>
+                    <div class="code-title">
+                        <a>
+                            <span class="code-icon" style="color: #343a40; font-size: 22px">
+                                <svg class="icon" aria-hidden="true">
+                                  <use xlink:href="#icon-node"></use>
+                                </svg>
+                            </span>
+                            <label>${code.codeName}</label>
+                        </a>
+                    </div>
+                </div>`
+            });
+            $(".card-blocks").empty().html(h);
+            $(".card-block").on('click', function (e) {
+                console.log('click', $(this).attr("code-id"));
+                window.location.href = "/graph?code=" + $(this).attr("code-id");
+            });
+        };
 
     });
 </script>

@@ -702,7 +702,7 @@ $(function () {
         if (max > 300) {
             let tip = `<div class="alert alert-warning alert-dismissible fade show m-2" role="alert"
     style="z-index: 3;" id="number-alert">
-    The elements on the graph are too much now. You can adjust CLOSENESS to filter out weak dependencies.
+    The elements on the graph are too much now. You can adjust <a data-toggle="modal" data-target="#filterModal">CLOSENESS</a> to filter out weak dependencies.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
