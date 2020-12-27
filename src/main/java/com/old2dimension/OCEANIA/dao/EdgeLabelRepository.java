@@ -23,4 +23,6 @@ public interface EdgeLabelRepository extends JpaRepository<EdgeLabel, Integer> {
     List<EdgeLabel> findEdgeLabelsByCodeIdAndUserId(int codeId, int userId);
 
     EdgeLabel findEdgeLabelById(int id);
+
+    List<EdgeLabel> findEdgeLabelsByCodeIdAndEdgeId(int codeId, int edgeId);
 }
