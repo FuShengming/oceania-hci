@@ -629,8 +629,9 @@ height: 100%;
                 <nav class="bg-light sidebar sidebar-right overflow-auto" id="info-block">
 
                     <div class="card m-2 code-card">
-                        <div class="h5 card-header" id="code-header">Code Block</div>
-                        <div class="card-body">
+                        <div class="h5 card-header" id="code-header"
+                             data-toggle="tooltip" data-placement="left" title="<p>This block shows the class and function of the chosen node. The form is:</p><p>[class name:function name]</p>">Code Block</div>
+                        <div class="card-body" data-toggle="tooltip" data-placement="bottom" title="<p >This block shows the code of the chosen node.</p>" id = "code-card-body">
                             <pre class="bg-white my-0" id="code-pre"><code>Click a node to get its code block.</code></pre>
                         </div>
                     </div>

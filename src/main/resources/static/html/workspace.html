@@ -105,7 +105,7 @@
         display: block;
         font-size: 12px;
         margin-top: 4px;
-        line-height: 16px;
+        line-height: 30px;
         max-height: 32px;
         overflow: hidden;
         white-space: nowrap;
@@ -135,6 +135,11 @@
 
     .card-block label {
         cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+        width:200px;
+
     }
 
     .code-tool input {
@@ -712,12 +717,8 @@
                     </div>
                     <div class="code-title">
                         <a>
-                            <span class="code-icon" style="color: #343a40; font-size: 22px">
-                                <svg class="icon" aria-hidden="true">
-                                  <use xlink:href="#icon-node"></use>
-                                </svg>
-                            </span>
-                            <label>${code.codeName}</label>
+
+                            <label  style="overflow: hidden; text-overflow: ellipsis;white-space:nowrap; width: 150px;"><i class="fa fa-code-fork"  style="font-size: 22px" aria-hidden="true"></i> &ensp;${code.codeName}</label>
                         </a>
                     </div>
                 </div>`

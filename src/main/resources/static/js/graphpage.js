@@ -1,6 +1,13 @@
 $(function () {
     $(".tooltip-options a").tooltip({html: true});
-
+    $("#code-card-body").tooltip({delay:{
+            show:1000
+        },
+        html: true});
+    $("#code-header").tooltip({delay:{
+            show:1000
+        },
+        html: true});
     let htmlDecodeByRegExp = function (str) {
         if (str.length == 0) return "";
         let temp = str.replace(/&amp;/g, "&");
