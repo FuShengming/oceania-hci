@@ -174,7 +174,7 @@ public class UploadBLImpl implements UploadBL {
 
     public ResponseVO analyzeJar(int userId, String uuid) {
         UploadConfirmForm uploadConfirmForm = new UploadConfirmForm();
-        uploadConfirmForm.setName(uuid);
+        uploadConfirmForm.setName("Untitled Project");
         uploadConfirmForm.setUserId(userId);
         uploadConfirmForm.setUuid(uuid);
         ResponseVO responseVO = uploadConfirm(uploadConfirmForm);
