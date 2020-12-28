@@ -394,7 +394,7 @@
         let codes = [];
         if (userId === undefined) window.location.href = "/login";
 
-        let rmv = function (codeId) {
+        let rmv = function (codeId,table) {
             if (confirm("Sure to remove this project permanently?")) {
                 $.ajax({
                     type: "post",
@@ -408,7 +408,11 @@
                     }),
                     success: function (data) {
                         if (data.success) {
-                            window.location.reload();
+                            if(table) {window.location.reload();}
+                            else {
+                                getCodesByUserId(false);
+                                renderBlockView();
+                            }
                         } else {
                             console.log(data.message);
                         }
@@ -420,7 +424,7 @@
             }
         };
 
-        let modify_name = function (codeId) {
+        let modify_name = function (codeId,table) {
             $("#name-input").val("");
             $("#name-submit").on('click', function () {
                 $.ajax({
@@ -437,7 +441,11 @@
                     success: function (data) {
                         if (data.success) {
                             $("#nameModal").modal('hide');
-                            window.location.reload();
+                            if(table){ window.location.reload();}
+                            else{
+                                getCodesByUserId(false);
+                                renderBlockView();
+                            }
                         } else {
                             console.log(data.message);
                         }
@@ -606,7 +614,7 @@
         });
 
 
-        let getCodesByUserId = function () {
+        let getCodesByUserId = function (table) {
             $.ajax({
                 type: "get",
                 url: "/code/getCodesByUserId/" + userId.toString(),
@@ -617,7 +625,10 @@
                 success: function (data) {
                     if (data.success) {
                         codes = data.content;
-                        renderListView();
+                        if(table){renderListView();}
+                        else{renderBlockView();}
+
+
                         $(".card-block").on('click', function (e) {
                             console.log('click', $(this).attr("code-id"));
                             // localStorage.setItem('codeId', $(this).attr("code-id"));
@@ -638,7 +649,7 @@
             });
         };
 
-        getCodesByUserId();
+        getCodesByUserId(true);
 
 
         let renderListView = function (name = "") {
@@ -665,10 +676,10 @@
                 title: 'Operations',
                 events: {
                     'click .modify-name': function (e, value, row, index) {
-                        modify_name(row.id);
+                        modify_name(row.id,true);
                     },
                     'click .rmv': function (e, value, row, index) {
-                        rmv(row.id);
+                        rmv(row.id,true);
                     }
                 },
                 formatter: `<button class="btn btn-sm btn-info modify-name" href="#">Rename</button>
@@ -697,6 +708,8 @@
             $('#code-table').bootstrapTable('refreshOptions', {
                 classes: 'table table-hover'
             });
+
+            $(".sortable").css("width","fit-content");
         };
 
         let renderBlockView = function (name = "") {
@@ -711,22 +724,39 @@
             let h = "<h5>Codes</h5>";
             list.forEach(function (code) {
                 console.log(code);
-                h += `<div class="card-block" code-id="${code.codeId}">
+                h += `<div class="card-block" code-id="${code.codeId}" style="cursor: pointer;">
                     <div class="code-image-container">
                         <img src="https://assets.processon.com/chart_image/thumb/5e776738e4b011fccea7a0a4.png">
                     </div>
-                    <div class="code-title">
+                    <div class="code-title d-flex">
                         <a>
 
                             <label  style="overflow: hidden; text-overflow: ellipsis;white-space:nowrap; width: 150px;"><i class="fa fa-code-fork"  style="font-size: 22px" aria-hidden="true"></i> &ensp;${code.codeName}</label>
                         </a>
+                        <button class="btn btn-light btn-setting px-0 ops" type="button" id="dropdownMenuButton" style="margin-left: 13px;"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-h setting-icon"></i>
+                         </button>
+                         <div class="dropdown-menu ops" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item modify-name" href="#" code-id="${code.codeId}"  data-toggle="modal" data-target="#nameModal">Modify Name</a>
+                                        <a class="dropdown-item rmv" href="#" code-id="${code.codeId}" >Remove</a>
+                         </div>
                     </div>
                 </div>`
             });
             $(".card-blocks").empty().html(h);
             $(".card-block").on('click', function (e) {
                 console.log('click', $(this).attr("code-id"));
-                window.location.href = "/graph?code=" + $(this).attr("code-id");
+                if(!$(this).classList.contains("ops")){
+                    window.location.href = "/graph?code=" + $(this).attr("code-id");
+                }
+
+            });
+            $(".modify-name").on("click",function () {
+                modify_name($(this).attr("code-id"),false);
+            });
+            $(".rmv").on("click",function () {
+                rmv($(this).attr("code-id"),false);
             });
         };
 
