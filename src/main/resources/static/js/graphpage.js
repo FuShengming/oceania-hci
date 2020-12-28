@@ -892,26 +892,26 @@ $(function () {
         cy.cxtmenu({
             selector: 'node.vertex.favor',
             commands: [
-                {
-                    content: '<span class="fa fa-arrows-alt fa-2x"></span>',
-                    select: function (ele) {
-                        expand_tree(ele.data("id"));
-                        get_v_labels(Number(ele.data("id").substring(1)));
-
-                        let info = ele.data("full_info");
-                        get_code(info);
-
-                        cy.$('node,edge').unselect();
-                        console.log('this id', ele.id());
-                        ele.select();
-                        let neighborhoods = ele.neighborhood();
-                        neighborhoods.forEach(function (nb) {
-                            console.log('neighbor id', nb.id());
-                            nb.select();
-                        });
-                        cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
-                    }
-                },
+                // {
+                //     content: '<span class="fa fa-arrows-alt fa-2x"></span>',
+                //     select: function (ele) {
+                //         expand_tree(ele.data("id"));
+                //         get_v_labels(Number(ele.data("id").substring(1)));
+                //
+                //         let info = ele.data("full_info");
+                //         get_code(info);
+                //
+                //         cy.$('node,edge').unselect();
+                //         console.log('this id', ele.id());
+                //         ele.select();
+                //         let neighborhoods = ele.neighborhood();
+                //         neighborhoods.forEach(function (nb) {
+                //             console.log('neighbor id', nb.id());
+                //             nb.select();
+                //         });
+                //         cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
+                //     }
+                // },
 
                 {
                     content: '<span style="color:#faff62;" class="fa fa-lightbulb-o fa-2x"></span>',
@@ -943,22 +943,22 @@ $(function () {
         cy.cxtmenu({
             selector: 'edge.favor',
             commands: [
-                {
-                    content: '<span class="fa fa-arrows-alt fa-2x"></span>',
-                    select: function (ele) {
-                        get_e_labels(Number(ele.data("id").substring(1)));
-
-                        cy.$('node,edge').unselect();
-                        console.log('this id', ele.id());
-                        ele.select();
-                        let neighborhoods = ele.neighborhood();
-                        neighborhoods.forEach(function (nb) {
-                            console.log('neighbor id', nb.id());
-                            nb.select();
-                        });
-                        cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
-                    }
-                },
+                // {
+                //     content: '<span class="fa fa-arrows-alt fa-2x"></span>',
+                //     select: function (ele) {
+                //         get_e_labels(Number(ele.data("id").substring(1)));
+                //
+                //         cy.$('node,edge').unselect();
+                //         console.log('this id', ele.id());
+                //         ele.select();
+                //         let neighborhoods = ele.neighborhood();
+                //         neighborhoods.forEach(function (nb) {
+                //             console.log('neighbor id', nb.id());
+                //             nb.select();
+                //         });
+                //         cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
+                //     }
+                // },
 
                 {
                     content: '<span style="color:#faff62;" class="fa fa-lightbulb-o fa-2x"></span>',
@@ -990,26 +990,26 @@ $(function () {
         cy.cxtmenu({
             selector: 'node.vertex[^favor]',
             commands: [
-                {
-                    content: '<span class="fa fa-arrows-alt fa-2x"></span>',
-                    select: function (ele) {
-                        expand_tree(ele.data("id"));
-                        get_v_labels(Number(ele.data("id").substring(1)));
-
-                        let info = ele.data("full_info");
-                        get_code(info);
-
-                        cy.$('node,edge').unselect();
-                        console.log('this id', ele.id());
-                        ele.select();
-                        let neighborhoods = ele.neighborhood();
-                        neighborhoods.forEach(function (nb) {
-                            console.log('neighbor id', nb.id());
-                            nb.select();
-                        });
-                        cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
-                    }
-                },
+                // {
+                //     content: '<span class="fa fa-arrows-alt fa-2x"></span>',
+                //     select: function (ele) {
+                //         expand_tree(ele.data("id"));
+                //         get_v_labels(Number(ele.data("id").substring(1)));
+                //
+                //         let info = ele.data("full_info");
+                //         get_code(info);
+                //
+                //         cy.$('node,edge').unselect();
+                //         console.log('this id', ele.id());
+                //         ele.select();
+                //         let neighborhoods = ele.neighborhood();
+                //         neighborhoods.forEach(function (nb) {
+                //             console.log('neighbor id', nb.id());
+                //             nb.select();
+                //         });
+                //         cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
+                //     }
+                // },
 
                 {
                     content: '<span class="fa fa-lightbulb-o fa-2x"></span>',
@@ -1040,19 +1040,19 @@ $(function () {
         cy.cxtmenu({
             selector: 'edge[^favor]',
             commands: [
-                {
-                    content: '<span class="fa fa-arrows-alt fa-2x"></span>',
-                    select: function (ele) {
-                        get_e_labels(Number(ele.data("id").substring(1)));
-
-                        cy.$('node,edge').unselect();
-                        console.log('this id', ele.id());
-                        ele.select();
-                        ele.source().select();
-                        ele.target().select();
-                        cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
-                    }
-                },
+                // {
+                //     content: '<span class="fa fa-arrows-alt fa-2x"></span>',
+                //     select: function (ele) {
+                //         get_e_labels(Number(ele.data("id").substring(1)));
+                //
+                //         cy.$('node,edge').unselect();
+                //         console.log('this id', ele.id());
+                //         ele.select();
+                //         ele.source().select();
+                //         ele.target().select();
+                //         cy.fit(cy.$('node:selected'), $('#cy_container').height() * 0.25);
+                //     }
+                // },
 
                 {
                     content: '<span class="fa fa-lightbulb-o fa-2x"></span>',
@@ -1088,12 +1088,12 @@ $(function () {
         cy.cxtmenu({
             selector: 'node.domain',
             commands: [
-                {
-                    content: '<span class="fa fa-arrows-alt fa-2x"></span>',
-                    select: function (ele) {
-                        cy.fit(ele);
-                    }
-                },
+                // {
+                //     content: '<span class="fa fa-arrows-alt fa-2x"></span>',
+                //     select: function (ele) {
+                //         cy.fit(ele);
+                //     }
+                // },
 
                 {
                     content: '<span class="fa fa-bookmark fa-2x"></span>',

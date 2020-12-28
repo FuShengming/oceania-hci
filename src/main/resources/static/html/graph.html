@@ -85,7 +85,7 @@
         /* float buttons */
         #float_container {
             position: absolute;
-            top: calc(100% - 26rem); /* 100% - n * height - 1rem */
+            top: calc(100% - 21rem); /* 100% - n * height - 1rem */
             left: calc(100% - 5rem); /* 100% - weight - 1rem */
             z-index: 99;
             width: 4rem;
@@ -105,6 +105,13 @@
         /* cxtmenu */
         .cxtmenu-disabled {
             opacity: 0.333;
+        }
+
+        .help-btn {
+            position: absolute;
+            right: 2%;
+            top: 2%;
+            z-index: 99;
         }
 
         /* loader */
@@ -271,6 +278,17 @@
         .input-group span.twitter-typeahead .tt-menu {
             top: 2.375rem !important;
         }
+
+        .close-btn{
+            border-color: #666666;
+            border-width: 2px;
+        }
+
+        #helpModal .modal-content{
+            width: 700px;
+            max-height:800px;
+            overflow:auto;
+        }
     </style>
     <title>Call Graph</title>
 </head>
@@ -321,7 +339,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                 <button type="button" class="btn btn-primary m-2" id="label_submit">CONFIRM</button>
             </div>
         </div>
@@ -355,7 +373,7 @@
                                    aria-label="func-name" aria-describedby="basic-addon1" id="func-name-input">
                         </div>
                         <div class="p-0" style="text-align: right">
-                            <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                            <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                             <button type="button" class="btn btn-primary m-2" id="node-search-btn">SEARCH</button>
                         </div>
                     </div>
@@ -375,7 +393,7 @@
                                    aria-label="end-node" aria-describedby="basic-addon3" id="end-node-input">
                         </div>
                         <div class="p-0" style="text-align: right">
-                            <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                            <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                             <button type="button" class="btn btn-primary m-2" id="path-search-btn">SEARCH</button>
                         </div>
                     </div>
@@ -405,7 +423,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                 <button type="button" class="btn btn-primary m-2" id="ambiguous_submit1">CONFIRM</button>
             </div>
         </div>
@@ -429,7 +447,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                 <button type="button" class="btn btn-primary m-2" id="ambiguous_submit2">CONFIRM</button>
             </div>
         </div>
@@ -469,7 +487,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                 <button type="button" class="btn btn-primary m-2" id="filter_search">SEARCH</button>
             </div>
         </div>
@@ -503,7 +521,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
             </div>
         </div>
     </div>
@@ -520,7 +538,7 @@
                 <p style="font-size: 20px">Confirm cloning this project into your projects ?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                 <button type="button" class="btn btn-primary m-2" id="clone-submit">CONFIRM</button>
             </div>
         </div>
@@ -539,8 +557,54 @@
                 <p style="font-size: 25px;align-content: center">Clone Succeed!</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary m-2" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn close-btn m-2" data-dismiss="modal">CLOSE</button>
                 <button type="button" class="btn btn-primary m-2" id="clone-identify">CHECK CLONED PROJECT</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- help modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModal"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Help</h3>
+            </div>
+            <div class="modal-body">
+                <h4>About Graph</h4>
+                <p>This page shows the dependencies in your code. By dependencies, we mean the method calls in your code. This graph will show all the method calls in your codes.&#10;</p>
+                <h4>Graph Elements</h4>
+                <p></p>
+                <h5>Vertex/Node</h5>
+                <p>A vertex/node in the graph represents a Java method</p>
+                <h5>Edge</h5>
+                <p>An edge in the graph represent a method call from the start vertex/node to the end vertex/node. The method that the start vertex/node represents is the caller. It calls the
+                    method that the end vertex/node represents. The method that the end vertex/node represents is the callee.&#10;
+                </p>
+                <h5>Domain</h5>
+                <p>Connected domain is a concept in graph theory. We can understand it in this way:&#10;</p>
+                <p>A region in a graph that its vertices/nodes has no edge connected with any outside vertices/nodes.&#10;</p>
+                <h4>Operation</h4>
+                <p></p>
+                <h5>Left Single Click</h5>
+                <p>You can use left single click to select a single vertex/node, edge or domain.&#10;</p>
+                <p>When you select a vertex//node, edge or domain, the bottom right side of the page will show the labels of this element&#10;<p>
+                <p>When you select a vertex//node, the top right side of the page will show the code of the method that vertex/node represents. The left side of the page will show its position
+                in the project structure.&#10;</p>
+                <h5>Right Single Click And Hold</h5>
+                <p>You can use right single click to select a single vertex/node, edge or domain.&#10;</p>
+                <p>When you right click a element in the graph, a circle as shown in the picture below will shows in the position of you click.&#10;</p>
+                <img src="../imgs/circle.jpg" alt="circle" style="size: 60px">
+                <p></p>
+                <p>&#10;You can hold the right click and move your mouse over one option in the circle.&#10;</p>
+                <p><i class="fa fa-lightbulb-o" style="font-size: 20px"></i> means to highlight this element.&#10;
+                    <i class="fa fa-bookmark" style="font-size: 20px"></i> means to add a label to this element.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn m-2 close-btn"  data-dismiss="modal">CLOSE</button>
             </div>
         </div>
     </div>
@@ -601,6 +665,11 @@ height: 100%;
                         </div>
                         <p class="h4" style="position: absolute;top: calc(40% + 84px);">Loading...</p>
                     </div>
+                    <div class="help-btn">
+                        <button class="btn btn-danger  btn-float" id = "help-btn" data-toggle="modal" data-target="#helpModal">
+                            <i class="fa fa-question" style="font-size: 20px"></i>
+                        </button>
+                    </div>>
                     <div class="row tooltip-options" id="float_container">
 
                         <button class="btn btn-success btn-float" id="layout-btn"
