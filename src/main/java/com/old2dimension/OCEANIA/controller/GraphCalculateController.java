@@ -34,9 +34,12 @@ public class GraphCalculateController {
         return graphCalculateBL.filterByWeightForm(weightForms);
     }
 
-    @RequestMapping(value = "/findVertex/{functionName}", method = RequestMethod.GET)
-    public ResponseVO findVertex(@PathVariable("functionName") String functionName) {
-        return graphCalculateBL.getAmbiguousFuncInfos(functionName);
+    @RequestMapping(value = "/findVertex", method = RequestMethod.GET)
+    public ResponseVO findVertex(@RequestParam String functionName) {
+
+        System.out.println("fn:"+functionName);
+        ResponseVO res = graphCalculateBL.getAmbiguousFuncInfos(functionName);
+        return res;
     }
 
     @RequestMapping(value = "/findPath", method = RequestMethod.POST)

@@ -429,7 +429,7 @@ $(function () {
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         // `states` is an array of state names defined in "The Basics"
         remote: {
-            url: '/graph/findVertex/%QUERY',
+            url: '/graph/findVertex?functionName=%QUERY',
             wildcard: '%QUERY',
             transform: function (data) {
                 console.log(data);
@@ -462,7 +462,7 @@ $(function () {
             alert("This node has been filtered out. Please adjust filter weights.")
         } else {
             n.select();
-            cy.fit(n, $('#cy_container').height() * 0.45);
+            cy.fit(n, $('#cy_container').height() * 0.05);
             let info = n.data("full_info");
             get_code(info);
             get_v_labels(Number(id.substring(1)));
@@ -476,7 +476,7 @@ $(function () {
         }
         $.ajax({
             type: "get",
-            url: "/graph/findVertex/" + $("#func-name-input").val(),
+            url: "/graph/findVertex?functionName=" + $("#func-name-input").val(),
             headers: {"Authorization": $.cookie('token')},
             success: function (data) {
                 console.log(data);
@@ -570,7 +570,7 @@ $(function () {
         $.when(
             $.ajax({
                 type: "get",
-                url: "/graph/findVertex/" + $("#start-node-input").val(),
+                url: "/graph/findVertex?functionName=" + $("#start-node-input").val().toString(),
                 headers: {"Authorization": $.cookie('token')},
                 error: function (err) {
                     console.log(err);
@@ -578,7 +578,7 @@ $(function () {
             }),
             $.ajax({
                 type: "get",
-                url: "/graph/findVertex/" + $("#end-node-input").val(),
+                url: "/graph/findVertex?functionName=" + $("#end-node-input").val().toString(),
                 headers: {"Authorization": $.cookie('token')},
                 error: function (err) {
                     console.log(err);
@@ -918,6 +918,9 @@ $(function () {
                     select: function (ele) {
                         ele.removeClass('favor');
                         ele.removeData('favor');
+                        ele=cy.$(':selected');
+                        ele.removeClass('favor');
+                        ele.removeData('favor');
                     },
                     // enabled: false
                 },
@@ -963,6 +966,9 @@ $(function () {
                 {
                     content: '<span style="color:#faff62;" class="fa fa-lightbulb-o fa-2x"></span>',
                     select: function (ele) {
+                        ele.removeClass('favor');
+                        ele.removeData('favor');
+                        ele=cy.$(':selected');
                         ele.removeClass('favor');
                         ele.removeData('favor');
                     },
@@ -1016,6 +1022,9 @@ $(function () {
                     select: function (ele) {
                         ele.addClass('favor');
                         ele.data('favor', true);
+                        ele=cy.$(':selected');
+                        ele.addClass('favor');
+                        ele.data('favor', true);
                     },
                 },
 
@@ -1059,10 +1068,14 @@ $(function () {
                     select: function (ele) {
                         ele.addClass('favor');
                         ele.data('favor', true);
-                        ele.source().addClass('favor');
-                        ele.source().data('favor', true);
-                        ele.target().addClass('favor');
-                        ele.target().data('favor', true);
+                        ele=cy.$(':selected');
+                        ele.addClass('favor');
+                        ele.data('favor', true);
+
+                        // ele.source().addClass('favor');
+                        // ele.source().data('favor', true);
+                        // ele.target().addClass('favor');
+                        // ele.target().data('favor', true);
                     },
                     // enabled: false
                 },

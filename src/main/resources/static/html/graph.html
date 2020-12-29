@@ -286,7 +286,10 @@
 
         #helpModal .modal-content{
             width: 700px;
-            max-height:800px;
+        }
+        #help-modal-body{
+            width: 700px;
+            max-height:600px;
             overflow:auto;
         }
     </style>
@@ -359,7 +362,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="search-paths-tab" data-toggle="tab" href="#search-paths" role="tab"
-                           aria-controls="search-paths" aria-selected="false">Search for Paths</a>
+                           aria-controls="search-paths" aria-selected="false">Search for Calling Paths</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -367,7 +370,7 @@
                          aria-labelledby="search-nodes-tab">
                         <div class="input-group my-4">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Function Name</span>
+                                <span class="input-group-text" id="basic-addon1">Function/Node Name</span>
                             </div>
                             <input type="text" class="form-control typeahead" data-provide="typeahead" placeholder=""
                                    aria-label="func-name" aria-describedby="basic-addon1" id="func-name-input">
@@ -467,7 +470,7 @@
                     <label for="ctm-range" class="h5 my-auto">Closeness
                         <label class="tooltip-options">
                             <a href="#" data-toggle="tooltip" data-placement="bottom"
-                               title="紧密度是边的属性，可以看作是此次调用在整个项目中的重要程度。计算公式为: 2/(被调用者的入度+调用者的出度)">
+                               title="<p>Closeness is an edge property and can be viewed as the importance of the call throughout the project. The calculation formula is:</p> <p>2/(the incoming degree of the caller + the outgoing degree of the caller).</p>">
                                 <img src="../imgs/问号.png" id="closeness-help"></a></label></label>
                     <div class="d-flex">
                         <output class="h5 d-block m-auto text-center" id="range_value">0</output>
@@ -572,7 +575,7 @@
             <div class="modal-header">
                 <h3 class="modal-title">Help</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id = "help-modal-body">
                 <h4>About Graph</h4>
                 <p>This page shows the dependencies in your code. By dependencies, we mean the method calls in your code. This graph will show all the method calls in your codes.&#10;</p>
                 <h4>Graph Elements</h4>
