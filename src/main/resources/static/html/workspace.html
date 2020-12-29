@@ -315,16 +315,16 @@
                             <span class="fa fa-plus-square mr-2"></span>New
                         </button>
                     </div>
-                    <div class="d-flex justify-content-end code-tool">
-                        <input type="text" id="search-input">
-                        <button type="button" class="btn btn-default" id="search-button" aria-label="Search">
-                            <svg class="icon">
+                    <div class="d-flex justify-content-end code-tool" style="width: 60%">
+                        <input type="text" id="search-input" style="width: 30%">
+                        <button type="button" class="btn btn-default" id="search-button" aria-label="Search" style="width: max-content">
+                            <svg class="icon" style="width: 25px;height: 25px">
                                 <use xlink:href="#icon-sousuo"></use>
                             </svg>
                         </button>
-                        <button type="button" class="btn btn-default" id="list-view-button" data-toggle="tooltip"
+                        <button type="button" class="btn btn-default"  id="list-view-button" data-toggle="tooltip"
                                 data-placement="bottom" title="<p>Change List View</p>">
-                            <svg class="icon">
+                            <svg class="icon" style="width: 25px;height: 25px">
                                 <use xlink:href="#icon-liebiao1" id="list-view-changer"></use>
                             </svg>
                         </button>
@@ -725,11 +725,11 @@
             list.forEach(function (code) {
                 console.log(code);
                 h += `<div class="card-block" code-id="${code.codeId}" style="cursor: pointer;">
-                    <div class="code-image-container">
+                    <div class="code-image-container" code-id="${code.codeId}">
                         <img src="https://assets.processon.com/chart_image/thumb/5e776738e4b011fccea7a0a4.png">
                     </div>
-                    <div class="code-title d-flex">
-                        <a>
+                    <div class="code-title d-flex" >
+                        <a class="titleLink" code-id="${code.codeId}">
 
                             <label  style="overflow: hidden; text-overflow: ellipsis;white-space:nowrap; width: 150px;"><i class="fa fa-code-fork"  style="font-size: 22px" aria-hidden="true"></i> &ensp;${code.codeName}</label>
                         </a>
@@ -745,12 +745,11 @@
                 </div>`
             });
             $(".card-blocks").empty().html(h);
-            $(".card-block").on('click', function (e) {
-                console.log('click', $(this).attr("code-id"));
-                if(!$(this).classList.contains("ops")){
+            $(".code-image-container").on('click', function (e) {
                     window.location.href = "/graph?code=" + $(this).attr("code-id");
-                }
-
+            });
+            $(".titleLink").on('click', function (e) {
+                window.location.href = "/graph?code=" + $(this).attr("code-id");
             });
             $(".modify-name").on("click",function () {
                 modify_name($(this).attr("code-id"),false);
