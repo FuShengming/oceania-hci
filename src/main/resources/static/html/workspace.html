@@ -455,6 +455,9 @@
                     }
                 });
             });
+            $('#nameModal').on('shown.bs.modal', function () {
+                $('#name-input').focus();
+            });
             $("#nameModal").modal('show');
         };
 
