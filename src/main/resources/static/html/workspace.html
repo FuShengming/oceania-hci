@@ -237,7 +237,7 @@
             </div>
             <div class="modal-body step step-2">
                 <h4>Upload Your Project Codes</h4>
-                <div class="dropzone dz-clickable" id="codeDrop" style="max-height: 40em;overflow: auto;">
+                <div class="dropzone dz-clickable" id="codeDrop" style="max-height: 30em;overflow: auto;">
                     <div class="dz-message" data-dz-message="">
                         <span>Drop files here or click to upload.</span>
                     </div>
@@ -281,7 +281,7 @@
                                                                                   style="font-weight: 900;"></i> Oceania</a>
     <div class="collapse navbar-collapse col-10 px-0">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" style="padding-right: 65%;padding-left: 150%">
+            <li class="nav-item" style="padding-right: 65%;padding-left: 100%">
                 <a class="nav-link" href="/index">Home</a>
             </li>
             <li class="nav-item active" style="padding-right: 60%">
@@ -706,7 +706,13 @@
                     }
                 },
                 columns: col,
-                data: data
+                data: data,
+                formatNoMatches:function () {
+                    if($("#search-input").val()===""){
+                        return "<br/><b  style='font-size: 20px;'> You have no project yet, press the 'New' button to upload your first project!</b>"
+                    }
+                    return "<br/><b  style='font-size: 20px;'>No Matching Result Found.</b>";
+                }
             });
             $('#code-table').bootstrapTable('refreshOptions', {
                 classes: 'table table-hover'
