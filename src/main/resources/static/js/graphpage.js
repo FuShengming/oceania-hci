@@ -469,6 +469,23 @@ $(function () {
         }
     };
 
+    $('#searchModal').on('shown.bs.modal', function () {
+        if ($('#search-nodes-tab').attr("aria-selected") === "true") {
+            $('#func-name-input').focus();
+        }
+        else {
+            $('#start-node-input').focus();
+        }
+    });
+
+    $('#search-nodes-tab').on('click', function () {
+        $('#func-name-input').focus();
+    });
+
+    $('#search-paths-tab').on('click', function () {
+        $('#start-node-input').focus();
+    });
+
     $("#node-search-btn").on("click", function () {
         if ($("#func-name-input").val() === "") {
             alert("Input can't be empty.");
