@@ -41,7 +41,7 @@ public class WorkSpaceBLImpl implements WorkSpaceBL {
 
     public ResponseVO recover(UserAndCodeForm userAndCodeForm) {
         try {
-            WorkSpace curWS = workPlaceRepository.findLatestWorkSpace(userAndCodeForm.getUserId(), userAndCodeForm.getCodeId());
+            WorkSpace curWS = workPlaceRepository.findLatestWorkSpace(userAndCodeForm.getCodeId());
             if (curWS == null) {
                 return ResponseVO.buildFailure("no such workSpace");
             }

@@ -111,7 +111,7 @@ public class CodeBLImpl implements CodeBL {
         List<CodeAndDateForm> res = new ArrayList<CodeAndDateForm>();
         for (Code cur : dbRes) {
             CodeAndDateForm codeAndDateForm = null;
-            WorkSpace tempWs = workPlaceRepository.findLatestWorkSpace(userId, cur.getId());
+            WorkSpace tempWs = workPlaceRepository.findLatestWorkSpace(cur.getId());
             if (tempWs == null) {
                 codeAndDateForm = new CodeAndDateForm(cur, null);
             } else {

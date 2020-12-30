@@ -87,7 +87,7 @@ public class ShareBLImpl implements ShareBL {
             }
             //
             //搬运workspace
-            WorkSpace workSpace = workPlaceRepository.findLatestWorkSpace(oldUserId,oldCodeId);
+            WorkSpace workSpace = workPlaceRepository.findLatestWorkSpace(oldCodeId);
             if(workSpace != null){
                 WorkSpace newWorkSpace = new WorkSpace();
                 newWorkSpace.setUserId(newUserId);
