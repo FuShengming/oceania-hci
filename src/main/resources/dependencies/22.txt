@@ -1,0 +1,7 @@
+M:strategy.SaveClient:save(java.lang.Object) (I)strategy.ISaveData:save(java.lang.Object)
+M:strategy.TestUse:main(java.lang.String[]) (O)strategy.SaveToRedis:<init>()
+M:strategy.TestUse:main(java.lang.String[]) (O)strategy.SaveClient:<init>(strategy.ISaveData)
+M:strategy.TestUse:main(java.lang.String[]) (M)strategy.SaveClient:save(java.lang.Object)
+M:strategy.TestUse:main(java.lang.String[]) (O)strategy.SaveToFile:<init>()
+M:strategy.TestUse:main(java.lang.String[]) (M)strategy.SaveClient:setSaveData(strategy.ISaveData)
+M:strategy.TestUse:main(java.lang.String[]) (M)strategy.SaveClient:save(java.lang.Object)

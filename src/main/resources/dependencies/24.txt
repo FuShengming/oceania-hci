@@ -1,0 +1,7 @@
+M:simpleFactory.Factory:produce(java.lang.String) (O)simpleFactory.PRO5:<init>()
+M:simpleFactory.Factory:produce(java.lang.String) (O)simpleFactory.PRO6:<init>()
+M:simpleFactory.SimpleFactory:main(java.lang.String[]) (O)simpleFactory.Factory:<init>()
+M:simpleFactory.SimpleFactory:main(java.lang.String[]) (M)simpleFactory.Factory:produce(java.lang.String)
+M:simpleFactory.SimpleFactory:main(java.lang.String[]) (I)simpleFactory.MeizuPhone:run()
+M:simpleFactory.SimpleFactory:main(java.lang.String[]) (M)simpleFactory.Factory:produce(java.lang.String)
+M:simpleFactory.SimpleFactory:main(java.lang.String[]) (I)simpleFactory.MeizuPhone:run()

@@ -259,7 +259,7 @@ public class CodeBLImpl implements CodeBL {
         boolean isInit = false;
         String funcName = vertexVO.getFuncName();
         //------------构造函数---------------
-        if (funcName.equals("<init>")) {
+        if (funcName.equals(classStr)||funcName.equals("<init>")) {
             funcName = classStr;
             isInit = true;
             System.out.println("init:" + funcName);
@@ -271,12 +271,20 @@ public class CodeBLImpl implements CodeBL {
 
 
         boolean funcStringExist = false;
-        int funcIndex = content.indexOf(funcName);
+
+
+        int funcIndex = content.indexOf(funcName, content.indexOf(classStr, content.indexOf("class"))+classStr.length());
+
+
+
+        if (funcName.equals(classStr)&&vertexVO.getArgs().length==1&&content.indexOf(funcName+"()", content.indexOf(classStr, content.indexOf("class"))+classStr.length())==-1) {
+            return ResponseVO.buildFailure("This is a default constructor function. \nIt does not have an explicit function body.");
+        }
+
         int lineIndex = content.lastIndexOf(lineSeparator, funcIndex);
         if (funcIndex == -1) {
-            if (funcName.equals(classStr)) {
-                return ResponseVO.buildSuccess("do not have an explicit initialize function.");
-            }
+
+
             return ResponseVO.buildFailure("do not find function name in file");
         }
         String funcLine = content.substring(lineIndex + 1, funcIndex);
@@ -314,7 +322,7 @@ public class CodeBLImpl implements CodeBL {
             }
 
             int tempFuncStart = content.lastIndexOf("\n", funcIndex);
-            if (content.substring(tempFuncStart, funcIndex).contains("abstract")) {
+            if (content.substring(tempFuncStart, funcIndex).contains("abstract")||content.charAt(getBackCurves(content,content.indexOf("(",funcIndex))+1)==';') {
                 isAbstract = true;
             }
 
@@ -452,6 +460,9 @@ public class CodeBLImpl implements CodeBL {
         if (funcIndex == -1) {
             if (funcStringExist) {
                 return ResponseVO.buildFailure("doesn't have explicit declaration. It maybe a parent class function or library function.");
+            }
+            if(funcName.equals("<init>")){
+                return ResponseVO.buildSuccess("This is a default constructor function. it doesn't have a function body.");
             }
             return ResponseVO.buildFailure("match args do not exist ");
         }
